@@ -1,8 +1,10 @@
 #pragma once
 
 #include "graphics.hpp"
+#include <memory>
 #include <SDL2pp/SDL.hh>
 #include "config.hpp"
+#include "sprite.hpp"
 
 class Game
 {
@@ -24,4 +26,6 @@ private:
 
     void draw(Graphics &graphics);
     void update(float elapsed_time);
+
+    std::unique_ptr<Sprite> m_player;
 };

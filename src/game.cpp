@@ -1,14 +1,16 @@
 #include "game.hpp"
-#include <algorithm>
-#include <SDL2pp/SDL2pp.hh>
 #include "config.hpp"
 #include "input.hpp"
+#include <SDL2pp/SDL2pp.hh>
+#include <algorithm>
 
 using std::min;
+using std::make_unique;
 
 Game::Game(Config &config) :
     m_sdl(SDL_INIT_EVERYTHING),
-    m_config(config)
+    m_config(config),
+    m_player()
 {
 }
 
@@ -17,6 +19,8 @@ void Game::game_loop()
     Graphics graphics;
     Input input;
     SDL_Event event{};
+
+    m_player = make_unique<Sprite>(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, 100, 100);
 
     int last_update_time = SDL_GetTicks();
 
@@ -44,6 +48,8 @@ void Game::game_loop()
         int elapsed_time_ms = current_time_ms - last_update_time;
         update(min(elapsed_time_ms, m_config.MAX_FRAME_TIME));
         last_update_time = current_time_ms;
+
+        draw(graphics);
     }
 }
 
@@ -52,6 +58,9 @@ void Game::update(float /*elapsed_time*/)
 
 }
 
-void Game::draw(Graphics &/*graphics)*/)
+void Game::draw(Graphics &graphics)
 {
+    graphics.clear();
+    m_player->draw(graphics, 100, 100);
+    graphics.flip();
 }
