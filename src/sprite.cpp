@@ -24,3 +24,8 @@ void Sprite::draw(Graphics &graphics, int x, int y)
 }
 
 void Sprite::update() {}
+
+Vector2 Sprite::get_position() const
+{
+    return Vector2(m_x, m_y);
+}

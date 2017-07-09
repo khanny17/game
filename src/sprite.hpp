@@ -4,6 +4,7 @@
 #include <SDL2pp/SDL2pp.hh>
 #include "graphics.hpp"
 #include "config.hpp"
+#include "vector2.hpp"
 
 class Sprite
 {
@@ -15,6 +16,7 @@ public:
     virtual ~Sprite();
     virtual void update();
     void draw(Graphics &graphics, int x, int y);
+    Vector2 get_position() const;
 
 protected:
     SDL2pp::Rect m_source_rect;

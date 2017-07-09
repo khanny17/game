@@ -68,6 +68,10 @@ void Game::game_loop()
 
         m_player->calc_direction();
 
+        auto player_pos = m_player->get_position();
+        graphics.center_camera(player_pos.x, player_pos.y,
+                               m_config.PLAYER_WIDTH, m_config.PLAYER_HEIGHT);
+
         const int current_time_ms = SDL_GetTicks();
         int elapsed_time_ms = current_time_ms - last_update_time;
         update(min(elapsed_time_ms, m_config.MAX_FRAME_TIME));

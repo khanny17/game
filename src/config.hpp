@@ -12,6 +12,9 @@ public:
 
     const float WALK_SPEED = 0.2f;
 
+    const int PLAYER_WIDTH = 16; //in px
+    const int PLAYER_HEIGHT = 24; //in px
+
     Config(const Config&) = delete;
     Config& operator=(const Config&) = delete;
 };

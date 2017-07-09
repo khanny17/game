@@ -22,8 +22,8 @@ public:
      * Draws a texture to a certain part of the screen
      */
     void blit_surface(SDL2pp::Texture &texture,
-                      SDL2pp::Rect &sourceRect,
-                      SDL2pp::Rect &destRect);
+            SDL2pp::Rect &sourceRect,
+            SDL2pp::Rect &destRect);
 
     /**
      * Renders everything to the screen
@@ -35,11 +35,18 @@ public:
      */
     void clear();
 
-     SDL2pp::Renderer &get_renderer();
+    /**
+     * Move the camera's position to center on the given coords
+     */
+    void center_camera(int x, int y, int w, int h);
+
+    SDL2pp::Renderer &get_renderer();
 
 private:
     SDL2pp::Window m_window;
     SDL2pp::Renderer m_renderer;
+    SDL2pp::Rect m_camera;
+    const Config &m_config;
 
     std::map<std::string, std::unique_ptr<SDL2pp::Surface>> m_sprite_sheets;
 };
