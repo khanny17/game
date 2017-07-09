@@ -7,7 +7,7 @@
 using std::min;
 using std::make_unique;
 
-Game::Game(Config &config) :
+Game::Game(const Config &config) :
     m_sdl(SDL_INIT_EVERYTHING),
     m_config(config),
     m_player()
@@ -16,11 +16,12 @@ Game::Game(Config &config) :
 
 void Game::game_loop()
 {
-    Graphics graphics;
+    Graphics graphics(m_config);
     Input input;
     SDL_Event event{};
 
-    m_player = make_unique<Sprite>(graphics, "content/sprites/MyChar.png", 0, 0, 16, 16, 100, 100);
+    m_player = make_unique<Sprite>(graphics, "content/sprites/MyChar.png", 
+                                   0, 0, 16, 16, 100, 100, m_config);
 
     int last_update_time = SDL_GetTicks();
 

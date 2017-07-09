@@ -6,11 +6,12 @@
 #include <SDL2pp/Window.hh>
 #include <SDL2pp/Renderer.hh>
 #include <SDL2pp/Surface.hh>
+#include "config.hpp"
 
 class Graphics
 {
 public:
-    Graphics();
+    explicit Graphics(const Config &config);
 
     /**
      * Loads an image into the sprite_sheets map if it doesn't already exist

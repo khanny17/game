@@ -1,4 +1,5 @@
 #include "graphics.hpp"
+#include "config.hpp"
 #include <SDL2pp/SDL2pp.hh>
 
 using SDL2pp::Renderer;
@@ -8,10 +9,10 @@ using SDL2pp::Rect;
 using std::shared_ptr;
 using std::make_shared;
 
-Graphics::Graphics() :
+Graphics::Graphics(const Config &config) :
     m_window("Game", 
              SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-             640, 480, 
+             config.SCREEN_WIDTH, config.SCREEN_HEIGHT, 
              SDL_WINDOW_RESIZABLE),
     m_renderer(m_window, -1, SDL_RENDERER_ACCELERATED)
 {

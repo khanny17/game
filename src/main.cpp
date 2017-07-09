@@ -4,7 +4,7 @@
 
 int main(/* int argc, char **argv */)
 {
-    Config config{};
+    const Config config{};
     Game game(config);
     game.game_loop();
     return 0;
