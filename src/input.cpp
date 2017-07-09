@@ -9,14 +9,14 @@ void Input::begin_new_frame()
 
 void Input::key_up_event(const SDL_Event &event)
 {
-    m_pressed_keys[event.key.keysym.scancode] = true;
-    m_held_keys[event.key.keysym.scancode] = true;
+    m_released_keys[event.key.keysym.scancode] = true;
+    m_held_keys[event.key.keysym.scancode] = false;
 }
 
 void Input::key_down_event(const SDL_Event &event)
 {
-    m_released_keys[event.key.keysym.scancode] = true;
-    m_held_keys[event.key.keysym.scancode] = false;
+    m_pressed_keys[event.key.keysym.scancode] = true;
+    m_held_keys[event.key.keysym.scancode] = true;
 }
 
 bool Input::was_key_pressed(SDL_Scancode key)

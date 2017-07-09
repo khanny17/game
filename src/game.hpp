@@ -4,7 +4,7 @@
 #include <memory>
 #include <SDL2pp/SDL.hh>
 #include "config.hpp"
-#include "sprite.hpp"
+#include "player.hpp"
 
 class Game
 {
@@ -27,5 +27,5 @@ private:
     void draw(Graphics &graphics);
     void update(float elapsed_time);
 
-    std::unique_ptr<Sprite> m_player;
+    std::unique_ptr<Player> m_player;
 };

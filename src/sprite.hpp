@@ -16,11 +16,10 @@ public:
     virtual void update();
     void draw(Graphics &graphics, int x, int y);
 
-private:
+protected:
     SDL2pp::Rect m_source_rect;
     SDL2pp::Texture m_sprite_sheet;
-
+    const Config &m_config;
     float m_x;
     float m_y;
-    const Config &m_config;
 };

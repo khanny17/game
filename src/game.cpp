@@ -20,8 +20,7 @@ void Game::game_loop()
     Input input;
     SDL_Event event{};
 
-    m_player = make_unique<Sprite>(graphics, "content/sprites/MyChar.png", 
-                                   0, 0, 16, 16, 100, 100, m_config);
+    m_player = make_unique<Player>(graphics, 100, 100, m_config);
 
     int last_update_time = SDL_GetTicks();
 
@@ -41,8 +40,17 @@ void Game::game_loop()
                 return;
             }
         }
+
         if(input.was_key_pressed(SDL_SCANCODE_ESCAPE)){
             return;
+        }
+
+        if(input.is_key_held(SDL_SCANCODE_LEFT)){
+            m_player->move_left();
+        } else if(input.is_key_held(SDL_SCANCODE_RIGHT)){
+            m_player->move_right();
+        } else {
+            m_player->stop_moving();
         }
 
         const int current_time_ms = SDL_GetTicks();
@@ -54,14 +62,14 @@ void Game::game_loop()
     }
 }
 
-void Game::update(float /*elapsed_time*/)
+void Game::update(float elapsed_time)
 {
-
+    m_player->update(elapsed_time);
 }
 
 void Game::draw(Graphics &graphics)
 {
     graphics.clear();
-    m_player->draw(graphics, 100, 100);
+    m_player->draw(graphics);
     graphics.flip();
 }

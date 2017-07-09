@@ -9,12 +9,10 @@ Sprite::Sprite(Graphics &graphics, const string &file_path,
                const Config &config) :
     m_source_rect(sourceX, sourceY, width, height),
     m_sprite_sheet(graphics.get_renderer(), *graphics.load_image(file_path).get()),
+    m_config(config),
     m_x(posX),
-    m_y(posY),
-    m_config(config)
-{
-
-}
+    m_y(posY)
+{}
 
 Sprite::~Sprite() = default;
 
