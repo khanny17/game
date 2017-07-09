@@ -22,7 +22,7 @@ void Game::game_loop()
     SDL_Event event{};
 
     m_player = make_unique<Player>(graphics, 100, 100, m_config);
-    m_level = make_unique<Level>("map 1", Vector2(100, 100), graphics);
+    m_level = make_unique<Level>("map 1", Vector2(100, 100), graphics, m_config);
 
     int last_update_time = SDL_GetTicks();
 
