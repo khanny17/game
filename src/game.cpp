@@ -48,13 +48,25 @@ void Game::game_loop()
             }
         }
 
+        input.process_held_key_callbacks();
+
         if(input.is_key_held(SDL_SCANCODE_LEFT)){
             m_player->move_left();
-        } else if(input.is_key_held(SDL_SCANCODE_RIGHT)){
+        } else if(input.is_key_held(SDL_SCANCODE_RIGHT)) {
             m_player->move_right();
         } else {
-            m_player->stop_moving();
+            m_player->stop_horizontal();
         }
+
+        if(input.is_key_held(SDL_SCANCODE_UP)){
+            m_player->move_up();
+        } else if(input.is_key_held(SDL_SCANCODE_DOWN)) {
+            m_player->move_down();
+        } else {
+            m_player->stop_vertical();
+        }
+
+        m_player->calc_direction();
 
         const int current_time_ms = SDL_GetTicks();
         int elapsed_time_ms = current_time_ms - last_update_time;

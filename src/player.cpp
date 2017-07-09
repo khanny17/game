@@ -4,25 +4,29 @@
 using std::string;
 
 Player::Player(Graphics &graphics, float x, float y, const Config &config) :
-    AnimatedSprite(graphics, "content/sprites/MyChar.png", 
-                   0, 0, 16, 16, x, y, config, 100),
+    AnimatedSprite(graphics, "content/sprites/link.png", 
+                   0, 0, 16, 16, x, y, config, 50),
     m_dx(0),
     m_dy(0),
     m_facing(RIGHT)
-
 {
     graphics.load_image("content/sprites/link.png");
 
     setup_animations();
-    play_animation("RunRight");
+    play_animation("IdleDown");
 }
 
 void Player::setup_animations()
 {
-    add_animation(1, 0, 0, "IdleLeft", 16, 23, Vector2::zero());
-    add_animation(1, 0, 16, "IdleRight", 16, 23, Vector2::zero());
-    add_animation(3, 0, 0, "RunLeft", 16, 23, Vector2::zero());
-    add_animation(3, 0, 16, "RunRight", 16, 23, Vector2::zero());
+    add_animation(1, 0, 0,  "IdleDown",  16, 24, Vector2::zero());
+    add_animation(1, 0, 24, "IdleLeft",  16, 24, Vector2::zero());
+    add_animation(1, 0, 48, "IdleRight", 16, 24, Vector2::zero());
+    add_animation(1, 0, 72, "IdleUp",    16, 24, Vector2::zero());
+
+    add_animation(8, 0, 0,  "RunDown",   16, 24, Vector2::zero());
+    add_animation(7, 0, 24, "RunLeft",   16, 24, Vector2::zero());
+    add_animation(7, 0, 48, "RunRight",  16, 24, Vector2::zero());
+    add_animation(8, 0, 72, "RunUp",     16, 24, Vector2::zero());
 }
 
 void Player::animation_done(string /*current_animation*/)
@@ -32,40 +36,65 @@ void Player::animation_done(string /*current_animation*/)
 void Player::move_up()
 {
     m_dy = -m_config.WALK_SPEED;
-    play_animation("RunUp");
-    m_facing = UP;
 }
 
 void Player::move_down()
 {
     m_dy = m_config.WALK_SPEED;
-    play_animation("RunDown");
-    m_facing = DOWN;
 }
 
 void Player::move_left()
 {
     m_dx = -m_config.WALK_SPEED;
-    play_animation("RunLeft");
-    m_facing = LEFT;
 }
 
 void Player::move_right()
 {
     m_dx = m_config.WALK_SPEED;
-    play_animation("RunRight");
-    m_facing = RIGHT;
 }
 
-void Player::stop_moving()
+void Player::stop_vertical()
+{
+    m_dy = 0.0f;
+}
+
+void Player::stop_horizontal()
 {
     m_dx = 0.0f;
-    m_dy = 0.0f;
+}
+
+void Player::calc_direction()
+{
+    if(m_dy < 0.0f) {
+        m_facing = UP;
+        play_animation("RunUp");
+        return;
+    }
+
+    if(m_dy > 0.0f) {
+        m_facing = DOWN;
+        play_animation("RunDown");
+        return;
+    }
+
+    if(m_dx < 0.0f) {
+        m_facing = LEFT;
+        play_animation("RunLeft");
+        return;
+    }
+
+    if(m_dx > 0.0f) {
+        m_facing = RIGHT;
+        play_animation("RunRight");
+        return;
+    }
+    
+    //If we get here, it implies that we aren't moving at all
     switch(m_facing) {
-        case UP: play_animation("IdleUp"); break;
+        case UP:    play_animation("IdleUp"); break;
         case RIGHT: play_animation("IdleRight"); break;
-        case LEFT: play_animation("IdleLeft"); break;
-        case DOWN: play_animation("IdleDown"); break;
+        case LEFT:  play_animation("IdleLeft"); break;
+        case DOWN:  play_animation("IdleDown"); break;
     }
 }
 

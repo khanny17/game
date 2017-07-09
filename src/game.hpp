@@ -1,6 +1,7 @@
 #pragma once
 
 #include "graphics.hpp"
+#include "input.hpp"
 #include <memory>
 #include <SDL2pp/SDL.hh>
 #include "config.hpp"
