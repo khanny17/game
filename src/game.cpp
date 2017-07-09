@@ -20,13 +20,18 @@ void Game::game_loop()
     Graphics graphics(m_config);
     Input input;
     SDL_Event event{};
+    bool keep_running = true;
 
     m_player = make_unique<Player>(graphics, 100, 100, m_config);
     m_level = make_unique<Level>("map 1", Vector2(100, 100), graphics, m_config);
 
-    int last_update_time = SDL_GetTicks();
+    //Close when they press escape
+    input.on_key_down(SDL_SCANCODE_ESCAPE, [&keep_running](){
+        keep_running = false;
+    });
 
-    while(true) {
+    int last_update_time = SDL_GetTicks();
+    while(keep_running) {
         input.begin_new_frame();
 
         if(SDL_PollEvent(&event) != 0) {
@@ -41,10 +46,6 @@ void Game::game_loop()
             else if(event.type == SDL_QUIT) {
                 return;
             }
-        }
-
-        if(input.was_key_pressed(SDL_SCANCODE_ESCAPE)){
-            return;
         }
 
         if(input.is_key_held(SDL_SCANCODE_LEFT)){

@@ -11,7 +11,7 @@ Player::Player(Graphics &graphics, float x, float y, const Config &config) :
     m_facing(RIGHT)
 
 {
-    graphics.load_image("content/sprites/MyChar.png");
+    graphics.load_image("content/sprites/link.png");
 
     setup_animations();
     play_animation("RunRight");
@@ -19,14 +19,28 @@ Player::Player(Graphics &graphics, float x, float y, const Config &config) :
 
 void Player::setup_animations()
 {
-    add_animation(1, 0, 0, "IdleLeft", 16, 16, Vector2::zero());
-    add_animation(1, 0, 16, "IdleRight", 16, 16, Vector2::zero());
-    add_animation(3, 0, 0, "RunLeft", 16, 16, Vector2::zero());
-    add_animation(3, 0, 16, "RunRight", 16, 16, Vector2::zero());
+    add_animation(1, 0, 0, "IdleLeft", 16, 23, Vector2::zero());
+    add_animation(1, 0, 16, "IdleRight", 16, 23, Vector2::zero());
+    add_animation(3, 0, 0, "RunLeft", 16, 23, Vector2::zero());
+    add_animation(3, 0, 16, "RunRight", 16, 23, Vector2::zero());
 }
 
 void Player::animation_done(string /*current_animation*/)
 {
+}
+
+void Player::move_up()
+{
+    m_dy = -m_config.WALK_SPEED;
+    play_animation("RunUp");
+    m_facing = UP;
+}
+
+void Player::move_down()
+{
+    m_dy = m_config.WALK_SPEED;
+    play_animation("RunDown");
+    m_facing = DOWN;
 }
 
 void Player::move_left()
@@ -46,12 +60,19 @@ void Player::move_right()
 void Player::stop_moving()
 {
     m_dx = 0.0f;
-    play_animation(m_facing == RIGHT ? "IdleRight" : "IdleLeft");
+    m_dy = 0.0f;
+    switch(m_facing) {
+        case UP: play_animation("IdleUp"); break;
+        case RIGHT: play_animation("IdleRight"); break;
+        case LEFT: play_animation("IdleLeft"); break;
+        case DOWN: play_animation("IdleDown"); break;
+    }
 }
 
 void Player::update(float elapsed_time)
 {
     m_x += m_dx * elapsed_time;
+    m_y += m_dy * elapsed_time;
 
     AnimatedSprite::update(elapsed_time);
 }

@@ -12,6 +12,8 @@ public:
     void draw(Graphics &graphics);
     void update(float elapsed_time);
 
+    void move_up();
+    void move_down();
     void move_left();
     void move_right();
     void stop_moving();
