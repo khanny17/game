@@ -1,8 +1,13 @@
 #!/bin/bash
-set -e -x
+set -e
 
 mkdir -p cmake
 cd cmake
 cmake ..
-../util/run-clang-tidy.py #Our own version because it fails if clang fails
 make
+
+../util/run-clang-tidy.py #Our own version because the official was annoying
+
+echo
+echo "--- Build Successful ---"""
+echo

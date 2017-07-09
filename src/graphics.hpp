@@ -1,14 +1,14 @@
 #pragma once
 
 #include <memory>
-#include <SDL2/SDL.h>
+#include <SDL2pp/Window.hh>
+#include <SDL2pp/Renderer.hh>
 
 class Graphics
 {
 public:
     Graphics();
-    ~Graphics();
 private:
-    std::unique_ptr<SDL_Window> m_window;
-    std::unique_ptr<SDL_Renderer> m_renderer;
+    SDL2pp::Window m_window;
+    SDL2pp::Renderer m_renderer;
 };

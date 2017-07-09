@@ -1,11 +1,11 @@
 #include "graphics.hpp"
+#include <SDL2pp/SDL2pp.hh>
 
-Graphics::Graphics()
-{
-    SDL_CreateWindowAndRenderer(640, 480, 0, m_window, m_renderer);
-    SDL_SetWindowTitle(m_window, "Game");
-}
-
-Graphics::~Graphics()
+Graphics::Graphics() :
+    m_window("Game", 
+             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+             640, 480, 
+             SDL_WINDOW_RESIZABLE),
+    m_renderer(m_window, -1, SDL_RENDERER_ACCELERATED)
 {
 }

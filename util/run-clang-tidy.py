@@ -104,7 +104,7 @@ def run_tidy(args, tmpdir, build_path, queue):
     streamdata = child.communicate()[0]
     rc = child.returncode
     if rc is not 0:
-        print 'clang-tidy-failed: ' + str(invocation)
+        print streamdata
         any_failed = True
     queue.task_done()
 
@@ -152,7 +152,7 @@ def main():
     if args.checks:
       invocation.append('-checks=' + args.checks)
     invocation.append('-')
-    print subprocess.check_output(invocation)
+    #print subprocess.check_output(invocation)
   except:
     print >>sys.stderr, "Unable to run clang-tidy."
     sys.exit(1)

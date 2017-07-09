@@ -1,12 +1,11 @@
 #include <iostream>
-#include <SDL2/SDL.h>
-#include "graphics.hpp"
-
-using std::cout;
-using std::endl;
+#include <SDL2pp/SDL2pp.hh>
+#include "game.hpp"
 
 int main(/* int argc, char **argv */)
 {
-    cout << "Hola Mundo" << endl;
+    Config config{};
+    Game game(config);
+    game.game_loop();
     return 0;
 }
