@@ -10,7 +10,8 @@ using std::make_unique;
 Game::Game(const Config &config) :
     m_sdl(SDL_INIT_EVERYTHING),
     m_config(config),
-    m_player()
+    m_player(),
+    m_level()
 {
 }
 
@@ -21,6 +22,7 @@ void Game::game_loop()
     SDL_Event event{};
 
     m_player = make_unique<Player>(graphics, 100, 100, m_config);
+    m_level = make_unique<Level>("map 1", Vector2(100, 100), graphics);
 
     int last_update_time = SDL_GetTicks();
 
@@ -65,11 +67,13 @@ void Game::game_loop()
 void Game::update(float elapsed_time)
 {
     m_player->update(elapsed_time);
+    m_level->update(elapsed_time);
 }
 
 void Game::draw(Graphics &graphics)
 {
     graphics.clear();
+    m_level->draw(graphics);
     m_player->draw(graphics);
     graphics.flip();
 }

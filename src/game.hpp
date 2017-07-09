@@ -5,6 +5,7 @@
 #include <SDL2pp/SDL.hh>
 #include "config.hpp"
 #include "player.hpp"
+#include "level.hpp"
 
 class Game
 {
@@ -28,4 +29,5 @@ private:
     void update(float elapsed_time);
 
     std::unique_ptr<Player> m_player;
+    std::unique_ptr<Level> m_level;
 };

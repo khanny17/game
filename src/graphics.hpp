@@ -16,7 +16,7 @@ public:
     /**
      * Loads an image into the sprite_sheets map if it doesn't already exist
      */
-    std::shared_ptr<SDL2pp::Surface> load_image(const std::string &file_path);
+    SDL2pp::Surface &load_image(const std::string &file_path);
 
     /**
      * Draws a texture to a certain part of the screen
@@ -41,5 +41,5 @@ private:
     SDL2pp::Window m_window;
     SDL2pp::Renderer m_renderer;
 
-    std::map<std::string, std::shared_ptr<SDL2pp::Surface>> m_sprite_sheets;
+    std::map<std::string, std::unique_ptr<SDL2pp::Surface>> m_sprite_sheets;
 };
