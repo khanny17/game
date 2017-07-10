@@ -14,7 +14,7 @@ class AnimatedSprite : public Sprite
 public:
     AnimatedSprite(Graphics &graphics, const std::string &file_path,
                    int sourceX, int sourceY, int width, int height,
-                   float posX, float posY, const Config &config, float time_to_update);
+                   float posX, float posY, float time_to_update);
 
     void play_animation(const std::string &animation, bool once = false);
 

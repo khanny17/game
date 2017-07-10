@@ -8,7 +8,7 @@
 class Player : public AnimatedSprite
 {
 public:
-    Player(Graphics &graphics, float x, float y, const Config &config);
+    Player(Graphics &graphics, float x, float y);
     void draw(Graphics &graphics);
     void update(float elapsed_time);
 
@@ -24,5 +24,5 @@ public:
     void setup_animations();
 private:
     float m_dx, m_dy;
-    Direction m_facing;
+    Direction4 m_facing;
 };

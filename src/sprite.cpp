@@ -2,14 +2,13 @@
 
 using std::string;
 using SDL2pp::Rect;
+using Configuration::config;
 
 Sprite::Sprite(Graphics &graphics, const string &file_path, 
                int sourceX, int sourceY, int width, int height,
-               float posX, float posY,
-               const Config &config) :
+               float posX, float posY) :
     m_source_rect(sourceX, sourceY, width, height),
     m_sprite_sheet(graphics.get_renderer(), graphics.load_image(file_path)),
-    m_config(config),
     m_x(posX),
     m_y(posY)
 {}
@@ -18,8 +17,8 @@ Sprite::~Sprite() = default;
 
 void Sprite::draw(Graphics &graphics, int x, int y)
 {
-    Rect destRect(x, y, m_source_rect.w * m_config.SPRITE_SCALE, 
-                  m_source_rect.h * m_config.SPRITE_SCALE);
+    Rect destRect(x, y, m_source_rect.w * config.get<int>("sprite_scale"), 
+                  m_source_rect.h * config.get<int>("sprite_scale"));
     graphics.blit_surface(m_sprite_sheet, m_source_rect, destRect);
 }
 

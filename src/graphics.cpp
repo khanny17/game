@@ -7,15 +7,18 @@ using SDL2pp::Surface;
 using SDL2pp::Texture;
 using SDL2pp::Rect;
 using std::make_unique;
+using Configuration::config;
 
-Graphics::Graphics(const Config &config) :
+Graphics::Graphics() :
     m_window("Game", 
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-            config.SCREEN_WIDTH, config.SCREEN_HEIGHT, 
+            config.get<int>("screen_width"), 
+            config.get<int>("screen_height"), 
             SDL_WINDOW_RESIZABLE),
     m_renderer(m_window, -1, SDL_RENDERER_ACCELERATED),
-    m_camera(0, 0, config.SCREEN_WIDTH, config.SCREEN_HEIGHT),
-    m_config(config)
+    m_camera(0, 0, 
+             config.get<int>("screen_width"),
+             config.get<int>("screen_height"))
 {
 }
 
@@ -30,8 +33,8 @@ Surface &Graphics::load_image(const std::string &file_path)
 
 void Graphics::center_camera(int x, int y, int w, int h)
 {
-    m_camera.x = ( x + (w * m_config.SPRITE_SCALE) / 2 ) - m_config.SCREEN_WIDTH / 2;
-    m_camera.y = ( y + (h * m_config.SPRITE_SCALE) / 2 ) - m_config.SCREEN_HEIGHT / 2;
+    m_camera.x = ( x + (w * config.get<float>("sprite_scale")) / 2 ) - (config.get<int>("screen_width") / 2);
+    m_camera.y = ( y + (h * config.get<float>("sprite_scale")) / 2 ) - (config.get<int>("screen_height") / 2);
 }
 
 void Graphics::blit_surface(Texture &texture, Rect &sourceRect, Rect &destRect)

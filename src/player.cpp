@@ -2,10 +2,11 @@
 #include "graphics.hpp"
 
 using std::string;
+using Configuration::config;
 
-Player::Player(Graphics &graphics, float x, float y, const Config &config) :
+Player::Player(Graphics &graphics, float x, float y) :
     AnimatedSprite(graphics, "content/sprites/link.png", 
-                   0, 0, 16, 16, x, y, config, 50),
+                   0, 0, 16, 16, x, y, 50),
     m_dx(0),
     m_dy(0),
     m_facing(RIGHT)
@@ -35,22 +36,22 @@ void Player::animation_done(string /*current_animation*/)
 
 void Player::move_up()
 {
-    m_dy = -m_config.WALK_SPEED;
+    m_dy = -config.get<float>("walk_speed");
 }
 
 void Player::move_down()
 {
-    m_dy = m_config.WALK_SPEED;
+    m_dy = config.get<float>("walk_speed");
 }
 
 void Player::move_left()
 {
-    m_dx = -m_config.WALK_SPEED;
+    m_dx = -config.get<float>("walk_speed");
 }
 
 void Player::move_right()
 {
-    m_dx = m_config.WALK_SPEED;
+    m_dx = config.get<float>("walk_speed");
 }
 
 void Player::stop_vertical()

@@ -11,7 +11,7 @@
 class Graphics
 {
 public:
-    explicit Graphics(const Config &config);
+    Graphics();
 
     /**
      * Loads an image into the sprite_sheets map if it doesn't already exist
@@ -46,7 +46,6 @@ private:
     SDL2pp::Window m_window;
     SDL2pp::Renderer m_renderer;
     SDL2pp::Rect m_camera;
-    const Config &m_config;
 
     std::map<std::string, std::unique_ptr<SDL2pp::Surface>> m_sprite_sheets;
 };

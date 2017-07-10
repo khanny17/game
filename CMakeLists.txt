@@ -6,8 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Include FindSDL2.cmake
 find_package(SDL2PP REQUIRED)
-
 include_directories(${SDL2PP_INCLUDE_DIRS})
+
+#Include boost
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIR})
 
 find_program(
   CLANG_TIDY_EXE
@@ -31,7 +34,10 @@ IF( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json" )
   )
 ENDIF()
 
-# Setup our source/include files
+#include inih, the ini parser library
+include_directories("lib/inih/cpp")
+                                     
+# Setup our source/include files     
 include_directories("src")
 file(GLOB SOURCE_FILES 
     "src/*.hpp"
@@ -46,6 +52,7 @@ endif()
 
 add_executable(Game ${SOURCE_FILES})
 target_link_libraries(Game ${SDL2PP_LIBRARIES})
+target_link_libraries(Game ${Boost_LIBRARIES})
 
 set_target_properties(
   Game PROPERTIES
@@ -54,12 +61,12 @@ set_target_properties(
   COMPILE_FLAGS "${WARNING_FLAGS}"
 )
 
-if(CLANG_TIDY_EXE)
-  set_target_properties(
-    Game PROPERTIES
-    CXX_CLANG_TIDY "${DO_CLANG_TIDY}"
-  )
-endif()
+#if(CLANG_TIDY_EXE)
+#  set_target_properties(
+#    Game PROPERTIES
+#    CXX_CLANG_TIDY "${DO_CLANG_TIDY}"
+#  )
+#endif()
 
 
 #Setup testing stuff

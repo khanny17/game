@@ -4,13 +4,12 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 using SDL2pp::Rect;
+using Configuration::config;
 
 AnimatedSprite::AnimatedSprite(Graphics &graphics, const string &file_path,
                                int sourceX, int sourceY, int width, int height,
-                               float posX, float posY, const Config &config,
-                               float time_to_update) :
-    Sprite(graphics, file_path, sourceX, sourceY, width, height, posX, posY,
-           config),
+                               float posX, float posY, float time_to_update) :
+    Sprite(graphics, file_path, sourceX, sourceY, width, height, posX, posY),
     m_time_to_update(time_to_update),
     m_current_animation_once(false),
     m_current_animation(""),
@@ -88,8 +87,8 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y) {
 
     Rect destRect(x + offset.x,
                   y + offset.y, 
-                  m_source_rect.w * m_config.SPRITE_SCALE,
-                  m_source_rect.h * m_config.SPRITE_SCALE);
+                  m_source_rect.w * config.get<float>("sprite_scale"),
+                  m_source_rect.h * config.get<float>("sprite_scale"));
 
     Rect sourceRect = *m_animations.at(m_current_animation)[m_frame_index].get();
     graphics.blit_surface(m_sprite_sheet, sourceRect, destRect);

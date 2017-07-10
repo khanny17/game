@@ -4,8 +4,8 @@
 
 int main(/* int argc, char **argv */)
 {
-    const Config config{};
-    Game game(config);
+    Configuration::init("config/config.ini");
+    Game game;
     game.game_loop();
     return 0;
 }

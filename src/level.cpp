@@ -4,15 +4,14 @@ using std::move;
 using std::string;
 using SDL2pp::Rect;
 using SDL2pp::Texture;
+using Configuration::config;
 
-Level::Level(string map_name, Vector2 spawn_point, Graphics &graphics, 
-             const Config &config):
+Level::Level(string map_name, Vector2 spawn_point, Graphics &graphics) :
     m_map_name(map_name),
     m_spawn_point(spawn_point),
     m_size(0,0),
     m_background_texture(graphics.get_renderer(), 
-                         graphics.load_image("content/backgrounds/bkBlue.png")),
-    m_config(config)
+                         graphics.load_image("content/backgrounds/bkBlue.png"))
 {
     load_map(map_name, graphics);
 }
@@ -34,10 +33,10 @@ void Level::draw(Graphics &graphics)
     Rect sourceRect(0, 0, 64, 64);
     for(int x = 0; x < m_size.x / 64; ++x) {
         for(int y = 0; y < m_size.y / 64; ++y) {
-            Rect destRect(x * 64 * m_config.SPRITE_SCALE, 
-                          y * 64 * m_config.SPRITE_SCALE, 
-                          64 * m_config.SPRITE_SCALE, 
-                          64 * m_config.SPRITE_SCALE);
+            Rect destRect(x * 64 * config.get<int>("sprite_scale"), 
+                          y * 64 * config.get<int>("sprite_scale"), 
+                          64 * config.get<int>("sprite_scale"), 
+                          64 * config.get<int>("sprite_scale"));
             graphics.blit_surface(m_background_texture, sourceRect, destRect);
         }
     }

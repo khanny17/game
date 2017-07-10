@@ -1,5 +1,8 @@
 #pragma once
 
+#include <functional>
+#include <sstream>
+
 class Vector2
 {
 public:
@@ -10,4 +13,28 @@ public:
 
     int x;
     int y;
+
+    bool operator==(const Vector2 &other) const
+    { 
+        return x == other.x && y == other.y;
+    }
+
+    Vector2 operator*(int scalar) const
+    {
+        return Vector2(x * scalar, y * scalar);
+    }
 };
+
+namespace std
+{
+    template <>
+    struct hash<Vector2>
+    {
+        size_t operator()(const Vector2 &v) const
+        {
+            stringstream ss;
+            ss << v.x << "," << v.y;
+            return hash<string>()(ss.str());
+        }
+    };
+}
