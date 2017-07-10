@@ -4,7 +4,7 @@ set -e
 mkdir -p cmake
 cd cmake
 cmake ..
-make
+make -j4
 make test
 
 echo
