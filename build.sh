@@ -5,8 +5,7 @@ mkdir -p cmake
 cd cmake
 cmake ..
 make
-
-../util/run-clang-tidy.py #Our own version because the official was annoying
+make test
 
 echo
 echo "--- Build Successful ---"""
