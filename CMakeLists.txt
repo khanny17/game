@@ -68,8 +68,12 @@ target_include_directories(Catch INTERFACE "lib/Catch/single_include")
 
 file(GLOB TEST_SOURCES "test/unit/*.cpp")
 
-add_executable(unit_tests ${TEST_SOURCES})
+set(SOURCE_FILES_FOR_TEST ${SOURCE_FILES})
+list(REMOVE_ITEM SOURCE_FILES_FOR_TEST ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+
+add_executable(unit_tests ${TEST_SOURCES} ${SOURCE_FILES_FOR_TEST})
 target_link_libraries(unit_tests Catch)
+target_link_libraries(unit_tests ${SDL2PP_LIBRARIES})
 
 enable_testing()
 add_test(NAME UnitTests COMMAND unit_tests)
