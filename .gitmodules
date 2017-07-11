@@ -4,3 +4,6 @@
 [submodule "lib/Catch"]
 	path = lib/Catch
 	url = git@github.com:philsquared/Catch.git
+[submodule "lib/FakeIt"]
+	path = lib/FakeIt
+	url = https://github.com/eranpeer/FakeIt.git

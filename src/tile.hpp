@@ -15,6 +15,8 @@ public:
 
     void update(int elapsed_time);
     void draw(Graphics &graphics);
+
+    Vector2 get_position();
 private:
     SDL2pp::Texture &m_tileset;
     Vector2 m_size;

@@ -11,8 +11,7 @@ Tile::Tile(Texture &tileset, Vector2 size, Vector2 tileset_position,
     m_tileset(tileset),
     m_size(size),
     m_tileset_position(tileset_position),
-    m_position(Vector2(position.x * config.get<float>("sprite_scale"), 
-                       position.y * config.get<float>("sprite_scale")))
+    m_position(Vector2(position.x, position.y))
 {
 }
 
@@ -30,4 +29,9 @@ void Tile::draw(Graphics &graphics)
                      m_size.x, m_size.y);
 
     graphics.blit_surface(m_tileset, source_rect, dest_rect);
+}
+    
+Vector2 Tile::get_position()
+{
+    return m_position;
 }

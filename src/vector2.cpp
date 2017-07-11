@@ -8,3 +8,7 @@ Vector2 Vector2::zero()
 {
     return Vector2(0, 0);
 }
+
+std::ostream& operator <<(std::ostream& os, const Vector2 &vector2) {
+    return os << "Vector2(" << vector2.x << "," << vector2.y << ")";
+}

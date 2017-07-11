@@ -23,6 +23,8 @@ public:
     {
         return Vector2(x * scalar, y * scalar);
     }
+
+    friend std::ostream& operator<< (std::ostream& stream, const Vector2& matrix);
 };
 
 namespace std

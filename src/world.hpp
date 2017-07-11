@@ -24,6 +24,7 @@ public:
 private:
     /// Maps a coordinate to a chunk
     std::unordered_map<Vector2, std::unique_ptr<Chunk>> m_chunks;
+    SDL2pp::Texture m_tileset;
 
     /// Returns the current chunk the player is in
     Chunk &get_current_chunk();

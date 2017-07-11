@@ -3,9 +3,11 @@
 using std::make_unique;
 
 World::World(Graphics &graphics) :
-    m_chunks()
+    m_chunks(),
+    m_tileset(graphics.get_renderer(), 
+              graphics.load_image("content/backgrounds/bkBlue.png"))
 {
-    m_chunks[{0,0}] = make_unique<Chunk>(graphics, Vector2{0,0});
+    m_chunks[{0,0}] = make_unique<Chunk>(m_tileset, Vector2{0,0});
 }
 
 Chunk &World::get_current_chunk()

@@ -34,9 +34,6 @@ IF( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json" )
   )
 ENDIF()
 
-#include inih, the ini parser library
-include_directories("lib/inih/cpp")
-                                     
 # Setup our source/include files     
 include_directories("src")
 file(GLOB SOURCE_FILES 
@@ -72,6 +69,8 @@ set_target_properties(
 #Setup testing stuff
 add_library(Catch INTERFACE)
 target_include_directories(Catch INTERFACE "lib/Catch/single_include")
+add_library(FakeIt INTERFACE)
+target_include_directories(FakeIt INTERFACE "lib/FakeIt/single_header/catch")
 
 file(GLOB TEST_SOURCES "test/unit/*.cpp")
 
@@ -80,6 +79,7 @@ list(REMOVE_ITEM SOURCE_FILES_FOR_TEST ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 add_executable(unit_tests ${TEST_SOURCES} ${SOURCE_FILES_FOR_TEST})
 target_link_libraries(unit_tests Catch)
+target_link_libraries(unit_tests FakeIt)
 target_link_libraries(unit_tests ${SDL2PP_LIBRARIES})
 
 enable_testing()
