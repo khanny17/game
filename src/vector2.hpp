@@ -24,6 +24,11 @@ public:
         return Vector2(x * scalar, y * scalar);
     }
 
+    Vector2 operator/(int scalar) const
+    {
+        return Vector2(x / scalar, y / scalar);
+    }
+
     friend std::ostream& operator<< (std::ostream& stream, const Vector2& matrix);
 };
 

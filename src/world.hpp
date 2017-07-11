@@ -25,6 +25,7 @@ public:
     Player &get_player() const;
 
 private:
+    const int CHUNK_PX_SIZE;
     /// Maps a coordinate to a chunk
     std::unordered_map<Vector2, std::unique_ptr<Chunk>> m_chunks;
 
