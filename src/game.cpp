@@ -5,25 +5,37 @@
 #include <algorithm>
 
 using std::min;
+using std::move;
 using std::make_unique;
+using std::make_shared;
+using std::unique_ptr;
 using Configuration::config;
+using SDL2pp::Texture;
 
 Game::Game() :
     m_sdl(SDL_INIT_EVERYTHING),
-    m_player(),
     m_world()
 {
+}
+
+unique_ptr<World> Game::build_world(Graphics &graphics, Texture &tileset)
+{
+    auto player = make_unique<Player>(graphics, 0, 0);
+    auto world = make_unique<World>(move(player), tileset);
+    return world;
 }
 
 void Game::game_loop()
 {
     Graphics graphics;
+    Texture tileset(graphics.get_renderer(),
+			    	graphics.load_image("content/backgrounds/bkBlue.png"));
     Input input;
     SDL_Event event{};
     bool keep_running = true;
 
-    m_player = make_unique<Player>(graphics, 100, 100);
-    m_world = make_unique<World>(graphics);
+    m_world = build_world(graphics, tileset);
+    auto &player = m_world->get_player();
 
     //Close when they press escape
     input.on_key_down(SDL_SCANCODE_ESCAPE, [&keep_running](){
@@ -51,24 +63,24 @@ void Game::game_loop()
         input.process_held_key_callbacks();
 
         if(input.is_key_held(SDL_SCANCODE_LEFT)){
-            m_player->move_left();
+            player.move_left();
         } else if(input.is_key_held(SDL_SCANCODE_RIGHT)) {
-            m_player->move_right();
+            player.move_right();
         } else {
-            m_player->stop_horizontal();
+            player.stop_horizontal();
         }
 
         if(input.is_key_held(SDL_SCANCODE_UP)){
-            m_player->move_up();
+            player.move_up();
         } else if(input.is_key_held(SDL_SCANCODE_DOWN)) {
-            m_player->move_down();
+            player.move_down();
         } else {
-            m_player->stop_vertical();
+            player.stop_vertical();
         }
 
-        m_player->calc_direction();
+        player.calc_direction();
 
-        auto player_pos = m_player->get_position();
+        auto player_pos = player.get_position();
         graphics.center_camera(player_pos.x, player_pos.y,
                                config.get<int>("player_width"),
                                config.get<int>("player_height"));
@@ -84,7 +96,6 @@ void Game::game_loop()
 
 void Game::update(float elapsed_time)
 {
-    m_player->update(elapsed_time);
     m_world->update(elapsed_time);
 }
 
@@ -92,6 +103,5 @@ void Game::draw(Graphics &graphics)
 {
     graphics.clear();
     m_world->draw(graphics);
-    m_player->draw(graphics);
     graphics.flip();
 }

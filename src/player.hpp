@@ -9,6 +9,8 @@ class Player : public AnimatedSprite
 {
 public:
     Player(Graphics &graphics, float x, float y);
+    Player(const Player &other) = delete;
+
     void draw(Graphics &graphics);
     void update(float elapsed_time);
 

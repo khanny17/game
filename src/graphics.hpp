@@ -12,6 +12,7 @@ class Graphics
 {
 public:
     Graphics();
+    Graphics(const Graphics &other) = delete;
     virtual ~Graphics() = default;
 
     /**
