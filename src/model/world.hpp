@@ -1,10 +1,11 @@
 #pragma once
 
+#include "util/vector2.hpp"
 #include "model/player.hpp"
 #include "model/chunk.hpp"
+#include "model/pandoras_box.hpp"
 #include <memory>
 #include <unordered_map>
-#include "model/pandoras_box.hpp"
 
 /**
  * Holds information about the game world
