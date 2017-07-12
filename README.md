@@ -1,4 +1,4 @@
 # Game
 
 # Setup
-Install SDL2. On ubuntu, apt install libsdl2-dev.
+I will set up a CI build server, and when I do I will be able to answer this question concretely
