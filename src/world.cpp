@@ -1,6 +1,7 @@
 #include "world.hpp"
 
 using std::move;
+using std::array;
 using std::shared_ptr;
 using std::unique_ptr;
 using std::make_unique;
@@ -53,16 +54,41 @@ Chunk &World::get_current_chunk()
 
 }
 
+array<Vector2, 8> World::get_surrounding_chunk_positions(Vector2 given)
+{
+    return {{
+        Vector2(given.x - 1, given.y - 1),  
+        Vector2(given.x - 1, given.y),  
+        Vector2(given.x - 1, given.y + 1),  
+        Vector2(given.x,     given.y - 1),  
+        Vector2(given.x,     given.y + 1),  
+        Vector2(given.x + 1, given.y - 1),  
+        Vector2(given.x + 1, given.y),  
+        Vector2(given.x + 1, given.y + 1)
+    }};
+}
+
 void World::update(float elapsed_time)
 {
     m_player->update(elapsed_time);
     auto &cur_chunk = get_current_chunk();
     cur_chunk.update(elapsed_time);
+    for(auto chunk_pos: get_surrounding_chunk_positions(cur_chunk.get_chunk_pos())){
+        if(m_chunks.find(chunk_pos) == m_chunks.end()) {
+            m_chunks[chunk_pos] = gen_chunk(chunk_pos);
+        }
+        m_chunks[chunk_pos]->update(elapsed_time);
+    }
 }
 
 void World::draw(Graphics &g)
 {
     auto &cur_chunk = get_current_chunk();
     cur_chunk.draw(g);
+    for(auto chunk_pos: get_surrounding_chunk_positions(cur_chunk.get_chunk_pos())){
+        if(m_chunks.find(chunk_pos) != m_chunks.end()) {
+            m_chunks[chunk_pos]->draw(g);
+        }
+    }
     m_player->draw(g);
 }

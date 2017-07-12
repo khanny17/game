@@ -37,4 +37,6 @@ private:
     /// Returns the current chunk the player is in
     Chunk &get_current_chunk();
     std::unique_ptr<Chunk> gen_chunk(Vector2 position);
+
+    std::array<Vector2, 8> get_surrounding_chunk_positions(Vector2 given);
 };
