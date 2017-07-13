@@ -15,14 +15,17 @@ World::World(unique_ptr<Player> player, Texture &tileset) :
                   config.get<float>("sprite_scale")),
     m_chunks(),
     m_player(move(player)),
-    m_tileset(tileset)
+    m_tileset(tileset),
+    m_pandoras_box()
 {
     m_chunks[{0,0}] = gen_chunk(Vector2{0,0});
 }
 
 unique_ptr<Chunk> World::gen_chunk(Vector2 position)
 {
-    return make_unique<Chunk>(m_tileset, position);
+    auto new_chunk = make_unique<Chunk>(m_tileset, position);
+    m_pandoras_box.pick_poi_generator().populate(*new_chunk); 
+    return new_chunk;
 }
 
 Player &World::get_player() const

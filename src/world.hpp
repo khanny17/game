@@ -6,6 +6,7 @@
 #include <memory>
 #include <unordered_map>
 #include "graphics.hpp"
+#include "pandoras_box.hpp"
 
 /**
  * Holds information about the game world
@@ -33,6 +34,8 @@ private:
     std::unique_ptr<Player> m_player;
 
     SDL2pp::Texture &m_tileset;
+
+    PandorasBox m_pandoras_box;
 
     /// Returns the current chunk the player is in
     Chunk &get_current_chunk();
