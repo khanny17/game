@@ -17,12 +17,12 @@ Sprite::~Sprite() = default;
 
 void Sprite::draw(Graphics &graphics, int x, int y)
 {
-    Rect destRect(x, y, m_source_rect.w * config.get<int>("sprite_scale"), 
-                  m_source_rect.h * config.get<int>("sprite_scale"));
+    Rect destRect(x, y, m_source_rect.w * config->SPRITE_SCALE, 
+                  m_source_rect.h * config->SPRITE_SCALE);
     graphics.blit_surface(m_sprite_sheet, m_source_rect, destRect);
 }
 
-void Sprite::update() {}
+void Sprite::update(float /*elapsed_time*/) {}
 
 Vector2 Sprite::get_position() const
 {

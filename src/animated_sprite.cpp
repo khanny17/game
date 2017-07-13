@@ -56,9 +56,9 @@ void AnimatedSprite::stop_animation()
     animation_done(m_current_animation);
 }
 
-void AnimatedSprite::update(int elapsed_time)
+void AnimatedSprite::update(float elapsed_time)
 {
-    Sprite::update();
+    Sprite::update(elapsed_time);
 
     m_time_elapsed += elapsed_time;
     if(m_time_elapsed <= m_time_to_update) {
@@ -87,8 +87,8 @@ void AnimatedSprite::draw(Graphics &graphics, int x, int y) {
 
     Rect destRect(x + offset.x,
                   y + offset.y, 
-                  m_source_rect.w * config.get<float>("sprite_scale"),
-                  m_source_rect.h * config.get<float>("sprite_scale"));
+                  m_source_rect.w * config->SPRITE_SCALE,
+                  m_source_rect.h * config->SPRITE_SCALE);
 
     Rect sourceRect = *m_animations.at(m_current_animation)[m_frame_index].get();
     graphics.blit_surface(m_sprite_sheet, sourceRect, destRect);

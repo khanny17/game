@@ -21,7 +21,7 @@ Game::Game() :
 unique_ptr<World> Game::build_world(Graphics &graphics, Texture &tileset)
 {
     auto player = make_unique<Player>(graphics, 0, 0);
-    auto world = make_unique<World>(move(player), tileset);
+    auto world = make_unique<World>(move(player), tileset, graphics);
     return world;
 }
 
@@ -82,12 +82,12 @@ void Game::game_loop()
 
         auto player_pos = player.get_position();
         graphics.center_camera(player_pos.x, player_pos.y,
-                               config.get<int>("player_width"),
-                               config.get<int>("player_height"));
+                               config->PLAYER_WIDTH,
+                               config->PLAYER_HEIGHT);
 
         const int current_time_ms = SDL_GetTicks();
         int elapsed_time_ms = current_time_ms - last_update_time;
-        update(min(elapsed_time_ms, config.get<int>("max_frame_time")));
+        update(min(elapsed_time_ms, config->MAX_FRAME_TIME));
         last_update_time = current_time_ms;
 
         draw(graphics);

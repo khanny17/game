@@ -18,7 +18,7 @@ public:
 
     void play_animation(const std::string &animation, bool once = false);
 
-    void update(int elapsed_time);
+    void update(float elapsed_time);
 
     void draw(Graphics &graphics, int x, int y);
 

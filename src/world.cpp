@@ -9,14 +9,12 @@ using std::out_of_range;
 using SDL2pp::Texture;
 using Configuration::config;
 
-World::World(unique_ptr<Player> player, Texture &tileset) :
-    CHUNK_PX_SIZE(config.get<int>("chunk_size") * 
-                  config.get<int>("tile_size") *
-                  config.get<float>("sprite_scale")),
+World::World(unique_ptr<Player> player, Texture &tileset, Graphics &graphics) :
     m_chunks(),
     m_player(move(player)),
     m_tileset(tileset),
-    m_pandoras_box()
+    m_pandoras_box(),
+    m_graphics(graphics)
 {
     m_chunks[{0,0}] = gen_chunk(Vector2{0,0});
 }
@@ -24,7 +22,7 @@ World::World(unique_ptr<Player> player, Texture &tileset) :
 unique_ptr<Chunk> World::gen_chunk(Vector2 position)
 {
     auto new_chunk = make_unique<Chunk>(m_tileset, position);
-    m_pandoras_box.pick_poi_generator().populate(*new_chunk); 
+    m_pandoras_box.pick_poi_generator().populate(*new_chunk, m_graphics);
     return new_chunk;
 }
 
@@ -35,7 +33,7 @@ Player &World::get_player() const
 
 Chunk &World::get_current_chunk()
 {
-    Vector2 chunk_id = m_player->get_position() / CHUNK_PX_SIZE;
+    Vector2 chunk_id = m_player->get_position() / config->CHUNK_PX_SIZE;
     //If negative, we need to subtract one, for reasons you see if you calc it
     if(m_player->get_position().x < 0) {
         chunk_id.x -= 1;

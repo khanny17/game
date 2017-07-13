@@ -17,10 +17,12 @@ TEST_CASE("Tiles are added properly")
     const int CHUNK_SIZE = 10; 
     const int TILE_SIZE = 32; 
     const float SPRITE_SCALE = 2.0f;
-    Configuration::init("config/config.ini");
-    config.put("chunk_size", CHUNK_SIZE);
-    config.put("tile_size", TILE_SIZE);
-    config.put("sprite_scale", SPRITE_SCALE);
+
+    Configuration::init("config/config.ini", [&](auto ptree){
+        ptree.put("chunk_size", CHUNK_SIZE);
+        ptree.put("tile_size", TILE_SIZE);
+        ptree.put("sprite_scale", SPRITE_SCALE);
+    });
 
     Mock<Texture> texture_mock;
 

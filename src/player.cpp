@@ -36,22 +36,22 @@ void Player::animation_done(string /*current_animation*/)
 
 void Player::move_up()
 {
-    m_dy = -config.get<float>("walk_speed");
+    m_dy = -config->WALK_SPEED;
 }
 
 void Player::move_down()
 {
-    m_dy = config.get<float>("walk_speed");
+    m_dy = config->WALK_SPEED;
 }
 
 void Player::move_left()
 {
-    m_dx = -config.get<float>("walk_speed");
+    m_dx = -config->WALK_SPEED;
 }
 
 void Player::move_right()
 {
-    m_dx = config.get<float>("walk_speed");
+    m_dx = config->WALK_SPEED;
 }
 
 void Player::stop_vertical()

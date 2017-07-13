@@ -33,10 +33,10 @@ void Level::draw(Graphics &graphics)
     Rect sourceRect(0, 0, 64, 64);
     for(int x = 0; x < m_size.x / 64; ++x) {
         for(int y = 0; y < m_size.y / 64; ++y) {
-            Rect destRect(x * 64 * config.get<int>("sprite_scale"), 
-                          y * 64 * config.get<int>("sprite_scale"), 
-                          64 * config.get<int>("sprite_scale"), 
-                          64 * config.get<int>("sprite_scale"));
+            Rect destRect(x * 64 * config->SPRITE_SCALE, 
+                          y * 64 * config->SPRITE_SCALE, 
+                          64 * config->SPRITE_SCALE, 
+                          64 * config->SPRITE_SCALE);
             graphics.blit_surface(m_background_texture, sourceRect, destRect);
         }
     }

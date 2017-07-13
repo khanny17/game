@@ -14,6 +14,8 @@ public:
     int x;
     int y;
 
+    Vector2 to_pixel_units() const;
+
     bool operator==(const Vector2 &other) const
     { 
         return x == other.x && y == other.y;

@@ -5,5 +5,5 @@
 class CityGenerator : public POIGenerator
 {
 public:
-    void populate(Chunk &chunk);
+    void populate(Chunk &chunk, Graphics &graphics);
 };

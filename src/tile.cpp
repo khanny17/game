@@ -22,8 +22,8 @@ void Tile::update(int /*elapsed_time*/)
 void Tile::draw(Graphics &graphics)
 {
     Rect dest_rect(m_position.x, m_position.y,
-                   m_size.x * config.get<float>("sprite_scale"),
-                   m_size.y * config.get<float>("sprite_scale"));
+                   m_size.x * config->SPRITE_SCALE,
+                   m_size.y * config->SPRITE_SCALE);
     
     Rect source_rect(m_tileset_position.x, m_tileset_position.y,
                      m_size.x, m_size.y);

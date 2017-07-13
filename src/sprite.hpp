@@ -13,7 +13,7 @@ public:
            int sourceX, int sourceY, int width, int height,
            float posX, float posY);
     virtual ~Sprite();
-    virtual void update();
+    virtual void update(float elapsed_time);
     void draw(Graphics &graphics, int x, int y);
     Vector2 get_position() const;
 

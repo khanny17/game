@@ -13,12 +13,11 @@ class Graphics
 public:
     Graphics();
     Graphics(const Graphics &other) = delete;
-    virtual ~Graphics() = default;
 
     /**
      * Loads an image into the sprite_sheets map if it doesn't already exist
      */
-    virtual SDL2pp::Surface &load_image(const std::string &file_path);
+    SDL2pp::Surface &load_image(const std::string &file_path);
 
     /**
      * Draws a texture to a certain part of the screen

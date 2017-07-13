@@ -12,13 +12,13 @@ using Configuration::config;
 Graphics::Graphics() :
     m_window("Game", 
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-            config.get<int>("screen_width"), 
-            config.get<int>("screen_height"), 
+            config->SCREEN_WIDTH, 
+            config->SCREEN_HEIGHT, 
             SDL_WINDOW_RESIZABLE),
     m_renderer(m_window, -1, SDL_RENDERER_ACCELERATED),
     m_camera(0, 0, 
-             config.get<int>("screen_width"),
-             config.get<int>("screen_height"))
+             config->SCREEN_WIDTH,
+             config->SCREEN_HEIGHT)
 {
 }
 
@@ -33,8 +33,8 @@ Surface &Graphics::load_image(const std::string &file_path)
 
 void Graphics::center_camera(int x, int y, int w, int h)
 {
-    m_camera.x = ( x + (w * config.get<float>("sprite_scale")) / 2 ) - (config.get<int>("screen_width") / 2);
-    m_camera.y = ( y + (h * config.get<float>("sprite_scale")) / 2 ) - (config.get<int>("screen_height") / 2);
+    m_camera.x = ( x + (w * config->SPRITE_SCALE) / 2 ) - (config->SCREEN_WIDTH / 2);
+    m_camera.y = ( y + (h * config->SPRITE_SCALE) / 2 ) - (config->SCREEN_HEIGHT / 2);
 }
 
 void Graphics::blit_surface(Texture &texture, Rect &sourceRect, Rect &destRect)

@@ -17,7 +17,7 @@ public:
     /**
      * Default constructor which creates a new world
      */
-    World(std::unique_ptr<Player> player, SDL2pp::Texture &tileset);
+    World(std::unique_ptr<Player> player, SDL2pp::Texture &tileset, Graphics &graphics);
     World(const World &other) = delete;
 
     void update(float elapsed_time);
@@ -26,7 +26,6 @@ public:
     Player &get_player() const;
 
 private:
-    const int CHUNK_PX_SIZE;
     /// Maps a coordinate to a chunk
     std::unordered_map<Vector2, std::unique_ptr<Chunk>> m_chunks;
 
@@ -36,6 +35,8 @@ private:
     SDL2pp::Texture &m_tileset;
 
     PandorasBox m_pandoras_box;
+    
+    Graphics &m_graphics;
 
     /// Returns the current chunk the player is in
     Chunk &get_current_chunk();
