@@ -1,11 +1,8 @@
 #include <catch.hpp>
 #include <fakeit.hpp>
-#include "config.hpp"
-#include "chunk.hpp"
-#include "vector2.hpp"
-#include <iostream>
-
-using namespace std;
+#include "model/config.hpp"
+#include "model/chunk.hpp"
+#include "model/vector2.hpp"
 
 using SDL2pp::Texture;
 using namespace fakeit;

@@ -37,8 +37,10 @@ ENDIF()
 # Setup our source/include files     
 include_directories("src")
 file(GLOB SOURCE_FILES 
-    "src/*.hpp"
     "src/*.cpp"
+    "src/*.hpp"
+    "src/model/*.hpp"
+    "src/model/*.cpp"
 )
 
 # Setup compile warnings
