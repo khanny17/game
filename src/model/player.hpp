@@ -1,9 +1,10 @@
 #pragma once
 
-#include "graphics.hpp"
 #include "animated_sprite.hpp"
-#include "config.hpp"
-#include "direction.hpp"
+#include "util/config.hpp"
+#include "util/direction.hpp"
+
+class Graphics;
 
 class Player : public AnimatedSprite
 {

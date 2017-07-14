@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL2pp/SDL2pp.hh>
-#include "model/game.hpp"
+#include "game.hpp"
+#include "util/config.hpp"
 
 int main(/* int argc, char **argv */)
 {

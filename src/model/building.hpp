@@ -1,7 +1,7 @@
 #pragma once
 
 #include "object.hpp"
-#include "graphics.hpp"
+#include "view/graphics.hpp"
 #include "sprite.hpp"
 
 class Building : public Object

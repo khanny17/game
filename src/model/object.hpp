@@ -1,6 +1,6 @@
 #pragma once
 
-#include "graphics.hpp"
+#include "view/graphics.hpp"
 
 /**
  * This is really a placeholder, I haven't put thought into
@@ -12,5 +12,4 @@ class Object
 {
 public:
     virtual void update(float elapsed_time) = 0;
-    virtual void draw(Graphics &g) = 0;
 };

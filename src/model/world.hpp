@@ -1,12 +1,13 @@
 #pragma once
 
-#include "vector2.hpp"
-#include "player.hpp"
-#include "chunk.hpp"
+#include "model/player.hpp"
+#include "model/chunk.hpp"
 #include <memory>
 #include <unordered_map>
-#include "graphics.hpp"
-#include "pandoras_box.hpp"
+#include "view/graphics.hpp"
+#include "model/pandoras_box.hpp"
+
+class Vector2;
 
 /**
  * Holds information about the game world
@@ -24,6 +25,10 @@ public:
     void draw(Graphics &g);
 
     Player &get_player() const;
+    Chunk &get_current_chunk();
+    const Chunk &get_chunk(Vector2 pos) const;
+    bool chunk_at(Vector2 pos) const;
+    std::array<Vector2, 8> get_surrounding_chunk_positions(Vector2 given) const;
 
 private:
     /// Maps a coordinate to a chunk
@@ -39,8 +44,6 @@ private:
     Graphics &m_graphics;
 
     /// Returns the current chunk the player is in
-    Chunk &get_current_chunk();
     std::unique_ptr<Chunk> gen_chunk(Vector2 position);
 
-    std::array<Vector2, 8> get_surrounding_chunk_positions(Vector2 given);
 };

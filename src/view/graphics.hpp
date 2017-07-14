@@ -6,7 +6,7 @@
 #include <SDL2pp/Window.hh>
 #include <SDL2pp/Renderer.hh>
 #include <SDL2pp/Surface.hh>
-#include "config.hpp"
+#include "util/config.hpp"
 
 class Graphics
 {

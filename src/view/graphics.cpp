@@ -1,5 +1,4 @@
 #include "graphics.hpp"
-#include "config.hpp"
 #include <SDL2pp/SDL2pp.hh>
 
 using SDL2pp::Renderer;

@@ -1,7 +1,9 @@
 #include "game.hpp"
-#include "config.hpp"
-#include "input.hpp"
-#include <SDL2pp/SDL2pp.hh>
+#include "util/config.hpp"
+#include "control/input.hpp"
+#include "model/world.hpp"
+#include "view/graphics.hpp"
+#include <SDL2pp/Texture.hh>
 #include <algorithm>
 
 using std::min;

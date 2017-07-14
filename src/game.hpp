@@ -1,18 +1,21 @@
 #pragma once
 
-#include "graphics.hpp"
-#include "input.hpp"
+#include "model/world.hpp"
 #include <memory>
 #include <SDL2pp/SDL.hh>
-#include "config.hpp"
-#include "world.hpp"
+
+class Graphics;
+
+namespace SDL2pp 
+{
+    class Texture;
+}
 
 class Game
 {
 public:
     /**
      * Construct our "Game" object
-     * \param config object that contains global configuration data
      */
     Game();
 

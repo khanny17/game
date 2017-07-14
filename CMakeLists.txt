@@ -41,6 +41,8 @@ file(GLOB SOURCE_FILES
     "src/*.hpp"
     "src/model/*.hpp"
     "src/model/*.cpp"
+    "src/view/*.hpp"
+    "src/view/*.cpp"
 )
 
 # Setup compile warnings

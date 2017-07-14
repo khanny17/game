@@ -2,9 +2,9 @@
 
 #include <SDL2pp/Texture.hh>
 #include <memory>
-#include "graphics.hpp"
-#include "vector2.hpp"
-#include "config.hpp"
+#include "view/graphics.hpp"
+#include "util/vector2.hpp"
+#include "util/config.hpp"
 
 class Tile
 {

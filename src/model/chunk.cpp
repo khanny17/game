@@ -1,4 +1,7 @@
 #include "chunk.hpp"
+#include "util/config.hpp"
+#include "view/graphics.hpp"
+#include "model/tile.hpp"
 #include <SDL2pp/Texture.hh>
 
 using std::vector;
@@ -40,16 +43,6 @@ void Chunk::update(float elapsed_time)
     }
     for(auto &&object: m_objects) {
         object->update(elapsed_time);
-    }
-}
-
-void Chunk::draw(Graphics &g)
-{
-    for(auto &&tile: m_tiles) {
-        tile->draw(g);
-    }
-    for(auto &&object: m_objects) {
-        object->draw(g);
     }
 }
 

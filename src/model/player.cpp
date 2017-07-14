@@ -1,5 +1,5 @@
 #include "player.hpp"
-#include "graphics.hpp"
+#include "view/graphics.hpp"
 
 using std::string;
 using Configuration::config;

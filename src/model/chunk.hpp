@@ -1,14 +1,13 @@
 #pragma once
 
-#include "vector2.hpp"
-#include "direction.hpp"
-#include "config.hpp"
-#include "graphics.hpp"
-#include "tile.hpp"
+#include "util/vector2.hpp"
+#include "model/tile.hpp"
 #include "object.hpp"
 #include <memory>
 #include <vector>
 #include <SDL2pp/Texture.hh>
+
+class Graphics;
 
 /**
  * A section of the world
@@ -23,9 +22,9 @@ public:
     Chunk(const Chunk &other) = delete;
 
     void update(float elapsed_time);
-    void draw(Graphics &g);
 
     std::vector<std::unique_ptr<Tile>> &tiles();
+    std::vector<std::shared_ptr<Object>> &objects();
 
     Vector2 get_chunk_pos() const;
 

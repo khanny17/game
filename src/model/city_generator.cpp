@@ -1,6 +1,7 @@
 #include "city_generator.hpp"
 #include "building.hpp"
-#include "graphics.hpp"
+#include "view/graphics.hpp"
+#include "chunk.hpp"
 
 using std::make_shared;
 

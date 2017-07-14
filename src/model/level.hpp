@@ -1,7 +1,7 @@
 #pragma once
 
-#include "vector2.hpp"
-#include "graphics.hpp"
+#include "util/vector2.hpp"
+#include "view/graphics.hpp"
 #include <string>
 #include <SDL2pp/Texture.hh>
 

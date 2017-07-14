@@ -1,4 +1,5 @@
 #include "sprite.hpp"
+#include "view/graphics.hpp"
 
 using std::string;
 using SDL2pp::Rect;

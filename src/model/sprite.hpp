@@ -2,9 +2,10 @@
 
 #include <string>
 #include <SDL2pp/SDL2pp.hh>
-#include "graphics.hpp"
-#include "config.hpp"
-#include "vector2.hpp"
+#include "util/config.hpp"
+#include "util/vector2.hpp"
+
+class Graphics;
 
 class Sprite
 {

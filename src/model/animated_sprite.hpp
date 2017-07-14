@@ -1,13 +1,15 @@
 #pragma once
 
 #include "sprite.hpp"
-#include "graphics.hpp"
-#include "config.hpp"
-#include "vector2.hpp"
+#include "util/config.hpp"
+#include "util/vector2.hpp"
 #include <string>
 #include <memory>
 #include <vector>
+#include <map>
 #include <SDL2pp/Rect.hh>
+
+class Graphics;
 
 class AnimatedSprite : public Sprite 
 {

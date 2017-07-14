@@ -1,4 +1,5 @@
 #include "animated_sprite.hpp"
+#include "view/graphics.hpp"
 
 using std::string;
 using std::vector;
