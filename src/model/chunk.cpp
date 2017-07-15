@@ -31,7 +31,12 @@ void Chunk::add_object(shared_ptr<Object> object)
     m_objects.emplace_back(object);
 }
 
-vector<unique_ptr<Tile>> &Chunk::tiles()
+const vector<shared_ptr<Object>> &Chunk::objects() const
+{
+    return m_objects;
+}
+
+const vector<unique_ptr<Tile>> &Chunk::tiles() const
 {
     return m_tiles;
 }

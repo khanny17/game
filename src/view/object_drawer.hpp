@@ -6,5 +6,5 @@ class Graphics;
 class ObjectDrawer
 {
 public:
-    static void draw(Object &object, Graphics &g);
+    static void draw(const Object &object, Graphics &g);
 };

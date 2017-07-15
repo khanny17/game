@@ -34,16 +34,7 @@ Player &World::get_player() const
 
 Chunk &World::get_current_chunk()
 {
-    Vector2 chunk_id = m_player->get_position() / config->CHUNK_PX_SIZE;
-    //If negative, we need to subtract one, for reasons you see if you calc it
-    if(m_player->get_position().x < 0) {
-        chunk_id.x -= 1;
-    }
-
-    if(m_player->get_position().y < 0) {
-        chunk_id.y -= 1;
-    }
-
+    auto chunk_id = get_current_chunk_pos();
     try 
     {
         return *m_chunks.at(chunk_id);
@@ -55,9 +46,28 @@ Chunk &World::get_current_chunk()
     }
 }
 
+Vector2 World::get_current_chunk_pos() const
+{
+    Vector2 chunk_id = m_player->get_position() / config->CHUNK_PX_SIZE;
+    //If negative, we need to subtract one, for reasons you see if you calc it
+    if(m_player->get_position().x < 0) {
+        chunk_id.x -= 1;
+    }
+
+    if(m_player->get_position().y < 0) {
+        chunk_id.y -= 1;
+    }
+    return chunk_id;
+}
+
 const Chunk &World::get_chunk(Vector2 pos) const
 {
     return *m_chunks.at(pos);
+}
+
+bool World::chunk_at(Vector2 pos) const
+{
+    return m_chunks.find(pos) != m_chunks.end();
 }
 
 array<Vector2, 8> World::get_surrounding_chunk_positions(Vector2 given) const

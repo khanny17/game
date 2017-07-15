@@ -25,7 +25,7 @@ public:
     void draw(Graphics &g);
 
     Player &get_player() const;
-    Chunk &get_current_chunk();
+    Vector2 get_current_chunk_pos() const;
     const Chunk &get_chunk(Vector2 pos) const;
     bool chunk_at(Vector2 pos) const;
     std::array<Vector2, 8> get_surrounding_chunk_positions(Vector2 given) const;
@@ -45,5 +45,6 @@ private:
 
     /// Returns the current chunk the player is in
     std::unique_ptr<Chunk> gen_chunk(Vector2 position);
+    Chunk &get_current_chunk();
 
 };

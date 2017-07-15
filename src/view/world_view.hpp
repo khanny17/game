@@ -11,7 +11,7 @@ class WorldView
 public:
     WorldView(const World &world);
 
-    void draw(const Graphics &g);
+    void draw(Graphics &g);
 
 private:
     const World &m_world;

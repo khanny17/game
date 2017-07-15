@@ -5,6 +5,7 @@
 #include <SDL2pp/SDL.hh>
 
 class Graphics;
+class WorldView;
 
 namespace SDL2pp 
 {
@@ -27,7 +28,7 @@ public:
 private:
     SDL2pp::SDL m_sdl;
 
-    void draw(Graphics &graphics);
+    void draw(Graphics &graphics, WorldView &world_view);
     void update(float elapsed_time);
     std::unique_ptr<World> build_world(Graphics &graphics, SDL2pp::Texture &tileset);
 

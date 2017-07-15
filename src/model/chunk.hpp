@@ -23,10 +23,12 @@ public:
 
     void update(float elapsed_time);
 
-    std::vector<std::unique_ptr<Tile>> &tiles();
-    std::vector<std::shared_ptr<Object>> &objects();
+    const std::vector<std::unique_ptr<Tile>> &tiles() const;
+    const std::vector<std::shared_ptr<Object>> &objects() const;
 
     Vector2 get_chunk_pos() const;
+
+    bool chunk_at(Vector2 pos) const;
 
     /**
      * Add an object to this chunk, which will now

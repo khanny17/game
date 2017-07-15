@@ -5,7 +5,7 @@
 #include "graphics.hpp"
 #include "object_drawer.hpp"
 
-void ChunkDrawer::draw(Chunk &chunk, Graphics &g)
+void ChunkDrawer::draw(const Chunk &chunk, Graphics &g)
 {    
     for(auto &&tile: chunk.tiles()) {
         tile->draw(g);

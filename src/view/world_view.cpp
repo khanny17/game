@@ -8,13 +8,13 @@ WorldView::WorldView(const World &world) :
 {
 }
 
-void WorldView::draw(const Graphics &g)
+void WorldView::draw(Graphics &g)
 {
-    auto &cur_chunk = m_world.get_current_chunk();
+    auto &cur_chunk = m_world.get_chunk(m_world.get_current_chunk_pos());
     ChunkDrawer::draw(cur_chunk, g);
     for(auto chunk_pos: m_world.get_surrounding_chunk_positions(cur_chunk.get_chunk_pos())){
         if(m_world.chunk_at(chunk_pos)) {
-            ChunkDrawer::draw(m_world.get_chunk());
+            ChunkDrawer::draw(m_world.get_chunk(m_world.get_current_chunk_pos()), g);
         }
     }
     m_world.get_player().draw(g);

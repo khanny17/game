@@ -3,6 +3,7 @@
 #include "control/input.hpp"
 #include "model/world.hpp"
 #include "view/graphics.hpp"
+#include "view/world_view.hpp"
 #include <SDL2pp/Texture.hh>
 #include <algorithm>
 
@@ -37,6 +38,7 @@ void Game::game_loop()
     bool keep_running = true;
 
     m_world = build_world(graphics, tileset);
+    WorldView world_view(*m_world);
     auto &player = m_world->get_player();
 
     //Close when they press escape
@@ -92,7 +94,7 @@ void Game::game_loop()
         update(min(elapsed_time_ms, config->MAX_FRAME_TIME));
         last_update_time = current_time_ms;
 
-        draw(graphics);
+        draw(graphics, world_view);
     }
 }
 
@@ -101,9 +103,9 @@ void Game::update(float elapsed_time)
     m_world->update(elapsed_time);
 }
 
-void Game::draw(Graphics &graphics)
+void Game::draw(Graphics &graphics, WorldView &world_view)
 {
     graphics.clear();
-    m_world->draw(graphics);
+    world_view.draw(graphics);
     graphics.flip();
 }
