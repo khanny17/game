@@ -2,16 +2,16 @@
 
 #include "object.hpp"
 #include "view/graphics.hpp"
-#include "sprite.hpp"
+#include "view/sprite.hpp"
 
 class Building : public Object
 {
 public:
-    Building(Graphics &graphics, float posX, float posY);
+    Building(float posX, float posY);
     void update(float elapsed_time);
-    void draw(Graphics &g);
+    void draw();
 
 private:
     Sprite m_sprite;
-    Vector2 m_position;
+    Vector2<float> m_position;
 };

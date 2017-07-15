@@ -1,6 +1,5 @@
 #include "chunk.hpp"
 #include "util/config.hpp"
-#include "view/graphics.hpp"
 #include "model/tile.hpp"
 #include <SDL2pp/Texture.hh>
 
@@ -10,7 +9,7 @@ using std::shared_ptr;
 using SDL2pp::Texture;
 using Configuration::config;
 
-Chunk::Chunk(Texture &tileset, Vector2 chunk_pos) :
+Chunk::Chunk(Texture &tileset, Vector2<int> chunk_pos) :
     m_tiles(),
     m_tileset(tileset),
     m_chunk_pos(chunk_pos),
@@ -18,10 +17,10 @@ Chunk::Chunk(Texture &tileset, Vector2 chunk_pos) :
 {
     for(int x = 0; x < config->CHUNK_SIZE; ++x) {
         for(int y = 0; y < config->CHUNK_SIZE; ++y) {
-            Vector2 position = chunk_pos * config->CHUNK_PX_SIZE;
+            Vector2<int> position = chunk_pos * config->CHUNK_PX_SIZE;
             position.x += x * config->TILE_SIZE * config->SPRITE_SCALE; 
             position.y += y * config->TILE_SIZE * config->SPRITE_SCALE;
-            m_tiles.emplace_back(new Tile(m_tileset, Vector2{32,32}, Vector2{0,0}, position));
+            m_tiles.emplace_back(new Tile(m_tileset, Vector2<int>{32,32}, Vector2<int>{0,0}, position));
         }
     }
 }
@@ -51,7 +50,18 @@ void Chunk::update(float elapsed_time)
     }
 }
 
-Vector2 Chunk::get_chunk_pos() const
+Vector2<int> Chunk::get_chunk_pos() const
 {
     return m_chunk_pos;
+}
+
+vector<shared_ptr<Object>> Chunk::check_collisions(const Object &object) const
+{
+    vector<shared_ptr<Object>> collisions;
+    for(auto other: objects()) {
+        if(other->collides_with(object)) {
+            collisions.emplace_back(other);
+        }
+    }
+    return collisions;
 }

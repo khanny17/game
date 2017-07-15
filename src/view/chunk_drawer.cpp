@@ -5,12 +5,16 @@
 #include "graphics.hpp"
 #include "object_drawer.hpp"
 
-void ChunkDrawer::draw(const Chunk &chunk, Graphics &g)
+void ChunkDrawer::draw_background(const Chunk &chunk)
 {    
     for(auto &&tile: chunk.tiles()) {
-        tile->draw(g);
+        tile->draw();
     }
+}
+
+void ChunkDrawer::draw_objects(const Chunk &chunk)
+{    
     for(auto &&object: chunk.objects()) {
-        ObjectDrawer::draw(*object, g);
+        ObjectDrawer::draw(*object);
     }
 }

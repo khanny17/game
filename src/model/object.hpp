@@ -1,7 +1,7 @@
 #pragma once
 
-#include "view/graphics.hpp"
-#include "sprite.hpp"
+#include "util/vector2.hpp"
+#include <SDL2pp/Rect.hh>
 
 /**
  * This is really a placeholder, I haven't put thought into
@@ -12,11 +12,15 @@
 class Object
 {
 public:
-    Object(Vector2 position);
+    Object(Vector2<float> position, Vector2<float> size);
+    Object(const Object &other) = delete;
 
     virtual void update(float elapsed_time) = 0;
-    Vector2 get_position() const;
+    Vector2<float> get_position() const;
+    bool collides_with(const Object &other) const;
 
-private:
-    Vector2 m_position;
+protected:
+    Vector2<float> m_position;
+    Vector2<float> m_size;
+    SDL2pp::Rect m_bounding_box;
 };

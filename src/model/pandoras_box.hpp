@@ -2,6 +2,7 @@
 
 #include "poi_generator.hpp"
 #include "city_generator.hpp"
+#include "nothing_generator.hpp"
 
 /**
  * This class is responsible for randomly selecting a generator to use
@@ -19,4 +20,5 @@ public:
 
 private:
     CityGenerator m_city_generator;
+    NothingGenerator m_nothing_generator;
 };

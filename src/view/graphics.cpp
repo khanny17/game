@@ -8,6 +8,11 @@ using SDL2pp::Rect;
 using std::make_unique;
 using Configuration::config;
 
+namespace GraphicsSingleton
+{
+    std::unique_ptr<Graphics> graphics;
+}
+
 Graphics::Graphics() :
     m_window("Game", 
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,

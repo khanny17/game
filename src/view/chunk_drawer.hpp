@@ -1,10 +1,10 @@
 #pragma once
 
 class Chunk;
-class Graphics;
 
 class ChunkDrawer
 {
 public:
-    static void draw(const Chunk &chunk, Graphics &g);
+    static void draw_background(const Chunk &chunk);
+    static void draw_objects(const Chunk &chunk);
 };

@@ -4,9 +4,8 @@
 
 class Chunk;
 
-class CityGenerator : public POIGenerator
+class NothingGenerator : public POIGenerator
 {
 public:
-    CityGenerator();
     void populate(Chunk &chunk);
 };

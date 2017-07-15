@@ -29,8 +29,8 @@ TEST_CASE("Tiles are added properly")
 
     for(int i = 0; i < CHUNK_SIZE * CHUNK_SIZE; ++i)
     {
-        Vector2 expected_position {
-            static_cast<int>((i / CHUNK_SIZE) * TILE_SIZE * SPRITE_SCALE + c.get_chunk_pos().x * CHUNK_SIZE * TILE_SIZE * SPRITE_SCALE),
+        Vector2<int> expected_position {
+            static_cast<int>(static_cast<int>((i / CHUNK_SIZE) * TILE_SIZE * SPRITE_SCALE + c.get_chunk_pos().x * CHUNK_SIZE * TILE_SIZE * SPRITE_SCALE)),
             static_cast<int>((i % CHUNK_SIZE) * TILE_SIZE * SPRITE_SCALE + c.get_chunk_pos().y * CHUNK_SIZE * TILE_SIZE * SPRITE_SCALE)
         };
         REQUIRE(tiles[i]->get_position() == expected_position);

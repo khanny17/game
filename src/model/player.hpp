@@ -1,18 +1,16 @@
 #pragma once
 
-#include "animated_sprite.hpp"
+#include "object.hpp"
 #include "util/config.hpp"
 #include "util/direction.hpp"
 
-class Graphics;
-
-class Player : public AnimatedSprite
+class Player : public Object
 {
 public:
-    Player(Graphics &graphics, float x, float y);
+    Player(float x, float y);
     Player(const Player &other) = delete;
 
-    void draw(Graphics &graphics);
+    void draw();
     void update(float elapsed_time);
 
     void move_up();
@@ -22,9 +20,11 @@ public:
     void stop_horizontal();
     void stop_vertical();
     void calc_direction();
+    void handle_collisions(std::vector<std::shared_ptr<Object>> collisions);
 
-    void animation_done(std::string current_animation);
-    void setup_animations();
+    Vector2<float> get_velocity() const;
+    Direction4 get_facing() const;
+
 private:
     float m_dx, m_dy;
     Direction4 m_facing;

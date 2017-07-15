@@ -13,31 +13,32 @@ using std::make_unique;
 using std::make_shared;
 using std::unique_ptr;
 using Configuration::config;
+using GraphicsSingleton::graphics;
 using SDL2pp::Texture;
 
 Game::Game() :
     m_sdl(SDL_INIT_EVERYTHING),
     m_world()
 {
+    GraphicsSingleton::graphics.reset(new Graphics());
 }
 
-unique_ptr<World> Game::build_world(Graphics &graphics, Texture &tileset)
+unique_ptr<World> Game::build_world(Texture &tileset)
 {
-    auto player = make_unique<Player>(graphics, 0, 0);
-    auto world = make_unique<World>(move(player), tileset, graphics);
+    auto player = make_unique<Player>(0, 0);
+    auto world = make_unique<World>(move(player), tileset);
     return world;
 }
 
 void Game::game_loop()
 {
-    Graphics graphics;
-    Texture tileset(graphics.get_renderer(),
-			    	graphics.load_image("content/backgrounds/bkBlue.png"));
+    Texture tileset(graphics->get_renderer(),
+			    	graphics->load_image("content/backgrounds/bkBlue.png"));
     Input input;
     SDL_Event event{};
     bool keep_running = true;
 
-    m_world = build_world(graphics, tileset);
+    m_world = build_world(tileset);
     WorldView world_view(*m_world);
     auto &player = m_world->get_player();
 
@@ -85,7 +86,7 @@ void Game::game_loop()
         player.calc_direction();
 
         auto player_pos = player.get_position();
-        graphics.center_camera(player_pos.x, player_pos.y,
+        graphics->center_camera(player_pos.x, player_pos.y,
                                config->PLAYER_WIDTH,
                                config->PLAYER_HEIGHT);
 
@@ -94,7 +95,7 @@ void Game::game_loop()
         update(min(elapsed_time_ms, config->MAX_FRAME_TIME));
         last_update_time = current_time_ms;
 
-        draw(graphics, world_view);
+        draw(world_view, elapsed_time_ms);
     }
 }
 
@@ -103,9 +104,9 @@ void Game::update(float elapsed_time)
     m_world->update(elapsed_time);
 }
 
-void Game::draw(Graphics &graphics, WorldView &world_view)
+void Game::draw(WorldView &world_view, float elapsed_time)
 {
-    graphics.clear();
-    world_view.draw(graphics);
-    graphics.flip();
+    graphics->clear();
+    world_view.draw(elapsed_time);
+    graphics->flip();
 }

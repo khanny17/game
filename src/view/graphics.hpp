@@ -8,6 +8,13 @@
 #include <SDL2pp/Surface.hh>
 #include "util/config.hpp"
 
+class Graphics;
+
+namespace GraphicsSingleton
+{
+    extern std::unique_ptr<Graphics> graphics;
+}
+
 class Graphics
 {
 public:

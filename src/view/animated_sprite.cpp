@@ -6,11 +6,12 @@ using std::vector;
 using std::shared_ptr;
 using SDL2pp::Rect;
 using Configuration::config;
+using GraphicsSingleton::graphics;
 
-AnimatedSprite::AnimatedSprite(Graphics &graphics, const string &file_path,
+AnimatedSprite::AnimatedSprite(const string &file_path,
                                int sourceX, int sourceY, int width, int height,
-                               float posX, float posY, float time_to_update) :
-    Sprite(graphics, file_path, sourceX, sourceY, width, height, posX, posY),
+                               Vector2<float> position, float time_to_update) :
+    Sprite(file_path, sourceX, sourceY, width, height, position),
     m_time_to_update(time_to_update),
     m_current_animation_once(false),
     m_current_animation(""),
@@ -20,7 +21,7 @@ AnimatedSprite::AnimatedSprite(Graphics &graphics, const string &file_path,
 {}
 
 void AnimatedSprite::add_animation(int frames, int x, int y, string name,
-                                  int width, int height, Vector2 offset)
+                                   int width, int height, Vector2<float> offset)
 {
     m_animations.emplace(name, vector<shared_ptr<Rect>>{});
     auto &rectangles = m_animations.at(name);
@@ -79,20 +80,20 @@ void AnimatedSprite::update(float elapsed_time)
     }
 }
 
-void AnimatedSprite::draw(Graphics &graphics, int x, int y) {
+void AnimatedSprite::draw(Vector2<float> pos) {
     if(!m_visible) {
         return;
     }
 
     auto offset = m_offsets.at(m_current_animation);
 
-    Rect destRect(x + offset.x,
-                  y + offset.y, 
+    Rect destRect(pos.x + offset.x,
+                  pos.y + offset.y, 
                   m_source_rect.w * config->SPRITE_SCALE,
                   m_source_rect.h * config->SPRITE_SCALE);
 
     Rect sourceRect = *m_animations.at(m_current_animation)[m_frame_index].get();
-    graphics.blit_surface(m_sprite_sheet, sourceRect, destRect);
+    graphics->blit_surface(m_sprite_sheet, sourceRect, destRect);
 }
 
 void AnimatedSprite::animation_done(string /*current_animation*/)

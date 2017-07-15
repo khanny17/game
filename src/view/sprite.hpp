@@ -5,22 +5,18 @@
 #include "util/config.hpp"
 #include "util/vector2.hpp"
 
-class Graphics;
-
 class Sprite
 {
 public:
-    Sprite(Graphics &graphics, const std::string &file_path, 
+    Sprite(const std::string &file_path, 
            int sourceX, int sourceY, int width, int height,
-           float posX, float posY);
+           Vector2<float> position);
     virtual ~Sprite();
     virtual void update(float elapsed_time);
-    void draw(Graphics &graphics, int x, int y);
-    Vector2 get_position() const;
+    void draw(int x, int y);
 
 protected:
     SDL2pp::Rect m_source_rect;
     SDL2pp::Texture m_sprite_sheet;
-    float m_x;
-    float m_y;
+    Vector2<float> m_position;
 };

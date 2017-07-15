@@ -5,5 +5,5 @@
 class POIGenerator
 {
 public:
-    virtual void populate(Chunk &chunk, Graphics &graphics) = 0;
+    virtual void populate(Chunk &chunk) = 0;
 };

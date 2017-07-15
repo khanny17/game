@@ -5,13 +5,14 @@
 using SDL2pp::Texture;
 using SDL2pp::Rect;
 using Configuration::config;
+using GraphicsSingleton::graphics;
 
-Tile::Tile(Texture &tileset, Vector2 size, Vector2 tileset_position,
-           Vector2 position) :
+Tile::Tile(Texture &tileset, Vector2<int> size, Vector2<int> tileset_position,
+           Vector2<int> position) :
     m_tileset(tileset),
     m_size(size),
     m_tileset_position(tileset_position),
-    m_position(Vector2(position.x, position.y))
+    m_position(Vector2<int>(position.x, position.y))
 {
 }
 
@@ -19,7 +20,7 @@ void Tile::update(int /*elapsed_time*/)
 {
 }
 
-void Tile::draw(Graphics &graphics)
+void Tile::draw()
 {
     Rect dest_rect(m_position.x, m_position.y,
                    m_size.x * config->SPRITE_SCALE,
@@ -28,10 +29,10 @@ void Tile::draw(Graphics &graphics)
     Rect source_rect(m_tileset_position.x, m_tileset_position.y,
                      m_size.x, m_size.y);
 
-    graphics.blit_surface(m_tileset, source_rect, dest_rect);
+    graphics->blit_surface(m_tileset, source_rect, dest_rect);
 }
     
-Vector2 Tile::get_position()
+Vector2<int> Tile::get_position()
 {
     return m_position;
 }

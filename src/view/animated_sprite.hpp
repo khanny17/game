@@ -9,20 +9,18 @@
 #include <map>
 #include <SDL2pp/Rect.hh>
 
-class Graphics;
-
 class AnimatedSprite : public Sprite 
 {
 public:
-    AnimatedSprite(Graphics &graphics, const std::string &file_path,
+    AnimatedSprite(const std::string &file_path,
                    int sourceX, int sourceY, int width, int height,
-                   float posX, float posY, float time_to_update);
+                   Vector2<float> position, float time_to_update);
 
     void play_animation(const std::string &animation, bool once = false);
 
     void update(float elapsed_time);
 
-    void draw(Graphics &graphics, int x, int y);
+    void draw(Vector2<float> position);
 
 protected:
     double m_time_to_update;
@@ -30,7 +28,7 @@ protected:
     std::string m_current_animation;
 
     void add_animation(int frames, int x, int y, std::string name, 
-                      int width, int height, Vector2 offset);
+                       int width, int height, Vector2<float> offset);
 
     void reset_animations();
 
@@ -45,7 +43,7 @@ protected:
 
 private:
     std::map<std::string, std::vector<std::shared_ptr<SDL2pp::Rect>>> m_animations;
-    std::map<std::string, Vector2> m_offsets;
+    std::map<std::string, Vector2<float>> m_offsets;
 
     unsigned int m_frame_index;
     double m_time_elapsed;
