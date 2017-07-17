@@ -3,6 +3,8 @@
 #include "object.hpp"
 #include "util/config.hpp"
 #include "util/direction.hpp"
+#include <vector>
+#include <memory>
 
 class Player : public Object
 {

@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Include FindSDL2.cmake
+set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/lib/libSDL2pp )
 find_package(SDL2PP REQUIRED)
 include_directories(${SDL2PP_INCLUDE_DIRS})
 

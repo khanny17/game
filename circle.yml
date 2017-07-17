@@ -1,0 +1,39 @@
+machine:
+    pre:
+        # Update sources
+        - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        - wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+        - sudo apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-3.9 main"
+        - sudo apt-get update
+
+        # Install GCC 5
+        - sudo apt-get install gcc-5 g++-5
+        - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+        
+        # Install cmake 3.8
+        - wget https://cmake.org/files/v3.8/cmake-3.8.2-Linux-x86_64.tar.gz
+        - tar -xzvf cmake-3.8.2-Linux-x86_64.tar.gz
+        - cd cmake-3.8.2-Linux-x86_64 && sudo mv bin/* /usr/local/bin && sudo mv share/* /usr/local/share
+
+        # Install SDL2
+        - sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+        # Install boost
+        - sudo apt install libboost-all-dev
+
+        # Install clang 3.9
+        - sudo apt-get install clang-3.9 lldb-3.9 clang-tidy-3.9
+        - sudo cp /usr/bin/clang-tidy-3.9 /usr/bin/clang-tidy
+
+checkout:
+    post:
+        # Get the content for our submodules
+        - git submodule init && git submodule update --recursive
+
+        # Install SDL2pp (from the one in our repo)
+        - cd ./lib/libSDL2pp && cmake . && make && sudo make install
+
+
+test:
+    override:
+        - ./build.sh

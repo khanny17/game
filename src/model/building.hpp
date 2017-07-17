@@ -3,6 +3,7 @@
 #include "object.hpp"
 #include "view/graphics.hpp"
 #include "view/sprite.hpp"
+#include "util/vector2.hpp"
 
 class Building : public Object
 {

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 #include <functional>
 #include <SDL2pp/SDL2pp.hh>
 
@@ -57,4 +58,3 @@ private:
                                CbMapType &group);
 
 };
-
