@@ -6,5 +6,5 @@
 
 void ObjectDrawer::draw(const Object &object)
 {
-    const_cast<Building&>(static_cast<const Building&>(object)).draw();
+    const_cast<Object&>(object).draw();
 }

@@ -16,6 +16,7 @@ public:
     Object(const Object &other) = delete;
 
     virtual void update(float elapsed_time) = 0;
+    virtual void draw();
     Vector2<float> get_position() const;
     SDL2pp::Rect get_bounding_box() const;
     bool collides_with(const Object &other) const;

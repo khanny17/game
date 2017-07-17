@@ -18,7 +18,7 @@ using Configuration::config;
 TEST_CASE("Tiles are added properly")
 {
     //The value we will set for the chunk size, for testing purposes
-    const int CHUNK_SIZE = 10; 
+    const int CHUNK_SIZE = 20; 
     const int TILE_SIZE = 32; 
     const float SPRITE_SCALE = 2.0f;
 

@@ -29,9 +29,13 @@ Chunk::Chunk(Texture &tileset, Vector2<int> chunk_pos) :
     }
 }
 
-void Chunk::add_object(shared_ptr<Object> object)
+bool Chunk::add_object(shared_ptr<Object> object)
 {
-    m_objects.emplace_back(object);
+    if(check_collisions(*object).empty()) {
+        m_objects.emplace_back(object);
+        return true;
+    }
+    return false;
 }
 
 const vector<shared_ptr<Object>> &Chunk::objects() const

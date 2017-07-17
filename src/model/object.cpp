@@ -28,3 +28,7 @@ bool Object::collides_with(const Object &other) const
 {
     return get_bounding_box().Intersects(other.get_bounding_box());
 }
+
+void Object::draw()
+{
+}

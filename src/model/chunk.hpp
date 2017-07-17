@@ -32,7 +32,7 @@ public:
      * Add an object to this chunk, which will now
      * "own" the object
      */
-    void add_object(std::shared_ptr<Object> object);
+    bool add_object(std::shared_ptr<Object> object);
 
     std::vector<std::shared_ptr<Object>> check_collisions(const Object &other) const;
 
