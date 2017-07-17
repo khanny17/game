@@ -30,7 +30,6 @@ namespace Configuration
         MAX_FRAME_TIME(ptree.get<int>("max_frame_time")),
         WALK_SPEED(ptree.get<float>("walk_speed")),
         TILE_SIZE(ptree.get<int>("tile_size")),
-
         CHUNK_PX_SIZE(CHUNK_SIZE * TILE_SIZE * SPRITE_SCALE)
     {
     }

@@ -3,7 +3,14 @@
 #include "util/config.hpp"
 #include "model/chunk.hpp"
 #include "util/vector2.hpp"
+#include "model/building.hpp"
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
+using std::shared_ptr;
+using std::make_shared;
 using SDL2pp::Texture;
 using namespace fakeit;
 using Configuration::config;

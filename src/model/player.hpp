@@ -12,7 +12,6 @@ public:
     Player(float x, float y);
     Player(const Player &other) = delete;
 
-    void draw();
     void update(float elapsed_time);
 
     void move_up();

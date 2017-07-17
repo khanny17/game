@@ -3,6 +3,10 @@
 #include "model/tile.hpp"
 #include <SDL2pp/Texture.hh>
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
 using std::vector;
 using std::unique_ptr;
 using std::shared_ptr;

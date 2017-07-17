@@ -17,10 +17,10 @@ public:
 
     virtual void update(float elapsed_time) = 0;
     Vector2<float> get_position() const;
+    SDL2pp::Rect get_bounding_box() const;
     bool collides_with(const Object &other) const;
 
 protected:
     Vector2<float> m_position;
     Vector2<float> m_size;
-    SDL2pp::Rect m_bounding_box;
 };

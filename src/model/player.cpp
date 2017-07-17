@@ -80,7 +80,7 @@ void Player::update(float elapsed_time)
 void Player::handle_collisions(vector<shared_ptr<Object>> collisions)
 {
     for(auto object: collisions){
-        cout << object->get_position() << endl;
+        cout << "In player: " << object->get_position() << endl;
     }
 }
 
