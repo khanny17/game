@@ -1,6 +1,10 @@
 #include "world.hpp"
 #include "util/vector2.hpp"
 #include <algorithm>
+#include <iostream>
+
+using std::cerr;
+using std::endl;
 
 using std::move;
 using std::array;
@@ -63,7 +67,14 @@ Vector2<int> World::get_current_chunk_pos() const
 
 const Chunk &World::get_chunk(Vector2<int> pos) const
 {
-    return *m_chunks.at(pos);
+    try {
+        return *m_chunks.at(pos);
+    } 
+    catch(std::out_of_range)
+    {
+        cerr << "FATAL: No chunk at the given position. Did you forget to call World::chunk_at?" << endl;
+        throw;
+    }
 }
 
 bool World::chunk_at(Vector2<int> pos) const
@@ -93,6 +104,9 @@ vector<shared_ptr<Object>> World::collision_check(const Object &object) const
 
     //Check if there are collisions in objects in surrounding chunks
     for(auto neighbor_pos: get_surrounding_chunk_positions(chunk_pos)){
+        if(!chunk_at(neighbor_pos)){
+            continue;
+        }
         auto more = get_chunk(neighbor_pos).check_collisions(object);
         collisions.reserve(collisions.size() + more.size()); //hopefully speeds up insertion
         collisions.insert(collisions.end(), more.begin(), more.end());
