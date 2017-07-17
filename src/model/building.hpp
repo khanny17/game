@@ -12,6 +12,8 @@ public:
     void update(float elapsed_time);
     void draw();
 
+    Object::Type get_type() const;
+
 private:
     Sprite m_sprite;
     Vector2<float> m_position;

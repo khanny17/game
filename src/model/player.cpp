@@ -1,13 +1,14 @@
 #include "player.hpp"
 #include "view/graphics.hpp"
 #include "util/vector2.hpp"
+
 #include <iostream>
+using std::cout;
+using std::endl;
 
 using std::string;
 using std::vector;
 using std::shared_ptr;
-using std::cout;
-using std::endl;
 using Configuration::config;
 
 Player::Player(float x, float y) :
@@ -80,7 +81,22 @@ void Player::update(float elapsed_time)
 void Player::handle_collisions(vector<shared_ptr<Object>> collisions)
 {
     for(auto object: collisions){
-        cout << "In player: " << object->get_position() << endl;
+        auto side = get_collision_side(*object);
+        switch(side)
+        {
+            case LEFT:
+                m_position.x = object->get_bounding_box().GetX2() + 1;
+                break;
+            case RIGHT:
+                m_position.x = object->get_position().x - get_bounding_box().GetW();
+                break;
+            case UP:
+                m_position.y = object->get_bounding_box().GetY2() + 1;
+                break;
+            case DOWN:
+                m_position.y = object->get_position().y - get_bounding_box().GetH();
+                break;
+        }
     }
 }
 
@@ -92,4 +108,9 @@ Vector2<float> Player::get_velocity() const
 Direction4 Player::get_facing() const
 {
     return m_facing;
+}
+
+Object::Type Player::get_type() const
+{
+    return PLAYER;
 }

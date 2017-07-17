@@ -25,6 +25,7 @@ public:
 
     Vector2<float> get_velocity() const;
     Direction4 get_facing() const;
+    Object::Type get_type() const;
 
 private:
     float m_dx, m_dy;

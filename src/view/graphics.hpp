@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <SDL2pp/Window.hh>
 #include <SDL2pp/Renderer.hh>
@@ -55,5 +55,5 @@ private:
     SDL2pp::Renderer m_renderer;
     SDL2pp::Rect m_camera;
 
-    std::map<std::string, std::unique_ptr<SDL2pp::Surface>> m_sprite_sheets;
+    std::unordered_map<std::string, std::unique_ptr<SDL2pp::Surface>> m_sprite_sheets;
 };

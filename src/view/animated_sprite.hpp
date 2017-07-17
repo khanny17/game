@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <SDL2pp/Rect.hh>
 
 class AnimatedSprite : public Sprite 
@@ -42,8 +42,8 @@ protected:
     virtual void setup_animations() = 0;
 
 private:
-    std::map<std::string, std::vector<std::shared_ptr<SDL2pp::Rect>>> m_animations;
-    std::map<std::string, Vector2<float>> m_offsets;
+    std::unordered_map<std::string, std::vector<std::shared_ptr<SDL2pp::Rect>>> m_animations;
+    std::unordered_map<std::string, Vector2<float>> m_offsets;
 
     unsigned int m_frame_index;
     double m_time_elapsed;

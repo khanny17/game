@@ -20,3 +20,8 @@ void Building::draw()
 {
     m_sprite.draw(m_position.x, m_position.y);
 }
+
+Object::Type Building::get_type() const
+{
+    return BUILDING;
+}

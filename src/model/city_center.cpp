@@ -8,3 +8,8 @@ CityCenter::CityCenter(Vector2<float> position) :
 void CityCenter::update(float /*elapsed_time*/)
 {
 }
+
+Object::Type CityCenter::get_type() const
+{
+    return CITY_CENTER;
+}
