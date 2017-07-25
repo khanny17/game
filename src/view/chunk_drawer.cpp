@@ -12,9 +12,9 @@ void ChunkDrawer::draw_background(const Chunk &chunk)
     }
 }
 
-void ChunkDrawer::draw_objects(const Chunk &chunk)
+void ChunkDrawer::draw_objects(const Chunk &chunk, float elapsed_time)
 {    
     for(auto &&object: chunk.objects()) {
-        ObjectDrawer::draw(*object);
+        ObjectDrawer::draw(*object, elapsed_time);
     }
 }

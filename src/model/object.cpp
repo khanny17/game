@@ -8,9 +8,12 @@ using std::endl;
 using SDL2pp::Rect;
 using Configuration::config;
 
+unsigned long long Object::NEXT_ID = 0;
+
 Object::Object(Vector2<float> position, Vector2<float> size) :
     m_position(position),
-    m_size(size)
+    m_size(size),
+    m_id(NEXT_ID++)
 {
 }
 
@@ -66,4 +69,9 @@ Direction4 Object::get_collision_side(const Object &other) const
         cerr << "FATAL: How did this even happen?" << endl;   
         throw "Shit";
     }
+}
+
+unsigned long long Object::get_id() const
+{
+    return m_id;
 }

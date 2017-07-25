@@ -3,6 +3,7 @@
 #include "chunk.hpp"
 #include "util/random.hpp"
 #include "util/config.hpp"
+#include "npc.hpp"
 #include <iostream>
 
 using std::cout;
@@ -46,12 +47,30 @@ void CityGenerator::add_a_building(Chunk &chunk, CityCenter &city_center)
     while(max_tries > 0)
     {
         auto position = Random::point_within(city_center.get_position(), Vector2<float>(500, 500));
-        if(chunk.add_object(make_shared<Building>(position.x, position.y)))
+        auto building = make_shared<Building>(position.x, position.y);
+        if(chunk.add_object(building))
         {
             cout << "Generated building at " << position << endl;
+            spawn_people_in_a_building(building, chunk);
             return;
         }
         //We failed, try again
         --max_tries;
+    }
+}
+
+void CityGenerator::spawn_people_in_a_building(shared_ptr<Building> building, Chunk &chunk)
+{
+    auto num_people = Random::between(1, 4);
+    for(int i = 0; i < num_people; ++i) {
+        auto npc_pos = Random::point_within(building->get_position(), 
+                                            Vector2<float>(500, 500));
+        auto npc = make_shared<NPC>(npc_pos);
+        if(!chunk.add_object(npc)) {
+            cout << "Fuck" << endl;
+            continue;
+        }
+
+        npc->set_home(building);
     }
 }

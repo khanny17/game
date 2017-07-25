@@ -1,12 +1,12 @@
 #pragma once
 
-#include "object.hpp"
+#include "character.hpp"
 #include "util/config.hpp"
 #include "util/direction.hpp"
 #include <vector>
 #include <memory>
 
-class Player : public Object
+class Player : public Character
 {
 public:
     Player(float x, float y);
@@ -18,16 +18,6 @@ public:
     void move_down();
     void move_left();
     void move_right();
-    void stop_horizontal();
-    void stop_vertical();
-    void calc_direction();
-    void handle_collisions(std::vector<std::shared_ptr<Object>> collisions);
 
-    Vector2<float> get_velocity() const;
-    Direction4 get_facing() const;
     Object::Type get_type() const;
-
-private:
-    float m_dx, m_dy;
-    Direction4 m_facing;
 };

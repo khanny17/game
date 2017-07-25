@@ -22,5 +22,7 @@ private:
     PlayerView m_player_view;
 
     void draw_background(const Chunk &cur, std::array<Vector2<int>, 8> neighbors);
-    void draw_objects(const Chunk &cur, std::array<Vector2<int>, 8> neighbors);
+    void draw_objects(const Chunk &cur, 
+                      std::array<Vector2<int>, 8> neighbors, 
+                      float elapsed_time);
 };

@@ -18,6 +18,7 @@ public:
         NONE,
         BUILDING,
         PLAYER,
+        NPC,
         CITY_CENTER
     };
 
@@ -32,7 +33,13 @@ public:
     bool collides_with(const Object &other) const;
     Direction4 get_collision_side(const Object &other) const;
 
+    unsigned long long get_id() const;
+
 protected:
     Vector2<float> m_position;
     Vector2<float> m_size;
+
+private:
+    static unsigned long long NEXT_ID;
+    const unsigned long long m_id;
 };
